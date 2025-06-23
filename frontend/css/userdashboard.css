@@ -1,0 +1,161 @@
+/* Box Sizing Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Header */
+header {
+  background-color: #000000;
+  color: white;
+  padding: 10px 0;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+header nav .logo a {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+}
+
+header nav ul {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+header nav ul::-webkit-scrollbar {
+  display: none;
+}
+
+header nav ul li {
+  flex-shrink: 0;
+  margin: 0 10px;
+}
+
+header nav ul li a {
+  color: white;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+header nav ul li a:hover {
+  background-color: #ff6347;
+}
+
+/* Hero Section */
+.hero {
+  background: url('https://c.pxhere.com/photos/d1/9e/lamborghini_racing_car_auto_sports_car_flitzer_stylish_vehicles_automotive-630838.jpg!d') no-repeat center center/cover;
+  height: 100vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+/* Optional dark overlay */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 90%;
+  padding: 0 1rem;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.btn-primary {
+  background-color: #ff6347;
+  color: white;
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: #ff4500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header nav ul {
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  header nav ul li {
+    margin: 6px 0;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .btn-primary {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}

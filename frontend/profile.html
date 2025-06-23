@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Profile</title>
+  <link rel="stylesheet" href="css/profile.css" />
+    <!-- Add Font Awesome for Home icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<body>
+  <!-- Home icon link -->
+  <a href="userdashboard.html" class="home-icon">
+    <i class="fas fa-home"></i>
+  </a>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-card">
+      <img id="profilePic" class="profile-pic" src="" alt="Profile Picture"/>
+      <div class="profile-info">
+        <h2 id="name">Name</h2>
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>Phone:</strong> <span id="phone"></span></p>
+        <p><strong>Role:</strong> <span id="role"></span></p>
+        <p id="createdAt"></p>
+        <button class="edit-btn" onclick="openModal('editProfileModal')">Edit Profile</button>
+        <button class="reset-btn" onclick="openModal('resetPasswordModal')">Reset Password</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Profile Modal -->
+  <div class="modal" id="editProfileModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('editProfileModal')">&times;</span>
+      <h3>Edit Profile</h3>
+      <form id="editProfileForm" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="text" name="phone" placeholder="Phone" required />
+        <input type="file" name="profilePic" />
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Reset Password Modal -->
+  <div class="modal" id="resetPasswordModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('resetPasswordModal')">&times;</span>
+      <h3>Reset Password</h3>
+      <form id="resetPasswordForm">
+        <input type="password" name="password" placeholder="New Password" required />
+        <button type="submit">Update Password</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+:root {
+  --color-primary: #289745;
+  --color-accent: #ffc107;
+  --color-bg: #f4f6fc;
+  --color-card: white;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.1);
+  --spacing: 1rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--color-bg);
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: var(--spacing) auto;
+  padding: 0 var(--spacing);
+}
+
+.form-section {
+  background: var(--color-card);
+  padding: var(--spacing);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: var(--spacing);
+  display: none;
+}
+
+.field {
+  margin-bottom: var(--spacing);
+}
+
+.field label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.field input {
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  margin-top: 0.25rem;
+}
+
+#vehicleForm button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  margin-right: var(--spacing);
+  cursor: pointer;
+}
+
+#submitBtn {
+  background: var(--color-accent);
+}
+
+#cancelEdit {
+  background: #ccc;
+}
+
+.hidden {
+  display: none;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--spacing);
+}
+
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: var(--spacing);
+  flex: 1;
+}
+
+.card-content h3 {
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
+
+.card-content p {
+  margin: 0.25rem 0;
+}
+
+.card-actions {
+  display: flex;
+  gap: var(--spacing);
+  padding: var(--spacing);
+}
+
+.card-actions button {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.card-actions .edit {
+  background: #ffc107;
+}
+
+.card-actions .delete {
+  background: #c0392b;
+  color: white;
+}
+
+.card-actions .toggle {
+  background: var(--color-primary);
+  color: white;
+}
+
+.card-actions .review {
+  background: #3498db;
+  color: white;
+}
+
+.card-actions button:hover {
+  opacity: 0.9;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing);
+  margin-bottom: var(--spacing);
+  background: var(--color-card);
+  padding: var(--spacing);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.controls button,
+.controls input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+}
+
+.controls button {
+  background: var(--color-accent);
+  color: #333;
+  border: none;
+  cursor: pointer;
+}
+
+.controls input {
+  flex: 1;
+  min-width: 200px;
+}
+
+@media (max-width: 600px) {
+  .controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .controls input,
+  .controls button {
+    width: 100%;
+  }
+}
+
+.home-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  color: #000;
+  text-decoration: none;
+}
+
+.reviews-section {
+  margin-top: 2rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+#reviewsList {
+  margin-top: 1rem;
+}
+
+.review-item {
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem 0;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vehicle Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/vehicle-details.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Vehicle Info Section -->
+    <div class="vehicle-header" id="vehicleDetails"></div>
+
+    <!-- Booking Section -->
+    <div id="bookingSection" style="display: none;">
+      <h3>Book This Vehicle</h3>
+      
+      <label for="pickupDate">Pickup Date:
+        <input type="date" id="pickupDate" required>
+      </label>
+      
+      <label for="dropoffDate">Dropoff Date: 
+        <input type="date" id="dropoffDate" required>
+      </label>
+
+      <div class="summary">
+        <p><strong>Total Days:</strong> <span id="totalDays">0</span></p>
+        <p><strong>Total Price:</strong> ₹<span id="totalPrice">0</span></p>
+      </div>
+
+      <button id="confirmBtn">Confirm Booking</button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="js/vehicle-details.js"></script>
+</body>
+</html>

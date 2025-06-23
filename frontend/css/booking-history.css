@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .filter {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .loader {
+    text-align: center;
+    font-weight: bold;
+    display: none;
+  }
+  
+  .booking-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #fafafa;
+  }
+  .booking-item button {
+    display: inline-block;
+    margin: 10px 8px 0 0;
+    padding: 8px 12px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .booking-item .cancel-btn {
+    background-color: #dc3545;
+  }
+  
+  .booking-item .review-btn {
+    background-color: #28a745;
+  }
+  
+  .booking-item .download-btn {
+    background-color: #ffc107;
+    color: #000;
+  }
+  
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  .close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+  .stars {
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  .star {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+  }
+  
+  .star.selected {
+    color: gold;
+  }
+  
+  #review-comment {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  #submit-review {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+  }
+   /*home icon*/
+   .home-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    color: #000; /* You can change this color as per your design */
+    text-decoration: none;
+  }

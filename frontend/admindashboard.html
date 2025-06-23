@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/admindashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+<body>
+
+  <!-- Home icon -->
+  <a href="index.html" class="home-icon">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="vehiclemanage.html">Manage Vehicles</a></li>
+        <li><a href="bookingmanage.html">Manage Bookings</a></li>
+        <li><a href="usermanage.html" class="active">Manage Users</a></li>
+        <li><a href="index.html" id="logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="dashboard-container">
+    <div class="dashboard-stats">
+      <div class="stat-item">
+        <h3>Total Users</h3>
+        <p id="total-users">Loading...</p>
+      </div>
+      <div class="stat-item">
+        <h3>Total Bookings</h3>
+        <p id="total-bookings">Loading...</p>
+      </div>
+      <div class="stat-item">
+        <h3>Total Vehicles</h3>
+        <p id="total-vehicles">Loading...</p>
+      </div>
+    </div>
+
+    <div class="charts">
+      <div class="chart-container">
+        <h3>Bookings Over Time</h3>
+        <canvas id="bookingsChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Vehicle Usage Stats</h3>
+        <canvas id="vehicleUsageChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/admindashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Booking Management</title>
+  <link rel="stylesheet" href="css/bookingmanage.css" />
+   <!-- Add Font Awesome for Home icon -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <body>
+    <!-- Home icon link -->
+    <a href="admindashboard.html" class="home-icon">
+      <i class="fas fa-home"></i>
+    </a>
+</head>
+<body>
+  <main class="container">
+    <section class="controls">
+      <button id="loadAll">All Bookings</button>
+      <input type="text" id="filterUser" placeholder="Filter by User ID" />
+      <button id="loadByUser">Fetch by User</button>
+      <input type="text" id="filterVehicle" placeholder="Filter by Vehicle ID" />
+      <button id="loadByVehicle">Fetch by Vehicle</button>
+
+      <!-- Status filter dropdown -->
+      <select id="statusFilter">
+        <option value="">Filter by Status</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="In Use">In Use</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+      <button id="loadByStatus">Fetch by Status</button>
+    </section>
+
+    <section id="bookingsList" class="bookings-grid">
+      <!-- Booking cards will inject here -->
+    </section>
+  </main>
+
+  <script src="js/bookingmanage.js"></script>
+</body>
+</html>

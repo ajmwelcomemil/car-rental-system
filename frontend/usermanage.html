@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Management</title>
+  <link rel="stylesheet" href="css/usermanage.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+<body>
+  <!-- Home icon link -->
+  <a href="admindashboard.html" class="home-icon">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <main class="container">
+    <section class="controls">
+      <label for="blockFilter">Filter by status:</label>
+      <select id="blockFilter">
+        <option value="">All Users</option>
+        <option value="true">Blocked</option>
+        <option value="false">Unblocked</option>
+      </select>
+
+      <input type="text" id="searchInput" placeholder="Search users by name..." />
+      <button id="searchBtn">Search</button>
+      <button id="loadAllBtn">Load All Users</button>
+    </section>
+
+    <section id="usersGrid" class="cards-grid">
+      <!-- User cards injected here -->
+    </section>
+  </main>
+
+  <!-- Edit User Modal -->
+  <div id="editModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Edit User</h2>
+      <form id="editForm">
+        <input type="hidden" id="editUserId" />
+        <label>Name: <input type="text" id="editName" /></label><br/>
+        <label>Email: <input type="email" id="editEmail" /></label><br/>
+        <label>Phone: <input type="text" id="editPhone" /></label><br/>
+        <label>Role: <input type="text" id="editRole" /></label><br/>
+        <label>Status:
+          <select id="editIsBlocked">
+            <option value="false">Active</option>
+            <option value="true">Blocked</option>
+          </select>
+        </label><br/>
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/usermanage.js"></script>
+</body>
+</html>

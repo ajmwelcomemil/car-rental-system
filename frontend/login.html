@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Home icon link -->
+  <a href="index.html" class="home-icon">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Login form -->
+  <form id="login-form">
+    <center><h2>Car Rental System</h2></center>
+    <label for="email">Email:</label>
+    <input id="email" type="email" name="email" required placeholder="Enter your email"/>
+
+    <label for="password">Password:</label>
+    <input id="password" type="password" name="password" required placeholder="Enter your password"/>
+
+    <button type="submit">Log In</button>
+  </form>
+  
+  <footer>
+    <p>&copy; 2025 Car Rental System</p>
+  </footer>
+
+  <script src="js/login.js"></script>
+</body>
+</html>
