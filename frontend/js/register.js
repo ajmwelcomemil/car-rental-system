@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     preloader.style.display = 'flex';
     preloader.style.opacity = '1';
 
-    fetch('https://ajmcars.onrender.com/api/auth/register', {
+    fetch('https://ajmcars-vohf.onrender.com/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),

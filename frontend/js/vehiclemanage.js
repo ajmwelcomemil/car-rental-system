@@ -1,5 +1,5 @@
-const API = 'https://ajmcars.onrender.com/api/admin/vehicles';
-const APIF = 'https://ajmcars.onrender.com/api/vehicles';
+const API = 'https://ajmcars-vohf.onrender.com/api/admin/vehicles';
+const APIF = 'https://ajmcars-vohf.onrender.com/api/vehicles';
 const form = document.getElementById('vehicleForm');
 const grid = document.getElementById('vehiclesGrid');
 const title = document.getElementById('formTitle');
@@ -28,7 +28,7 @@ function createCard(v) {
   const card = document.createElement('div');
   card.className = 'card';
   card.innerHTML = `
-    <img src="https://ajmcars.onrender.com/uploads/${v.images[0] || 'placeholder.jpg'}" alt="${v.name}">
+    <img src="https://ajmcars-vohf.onrender.com/uploads/${v.images[0] || 'placeholder.jpg'}" alt="${v.name}">
     <div class="card-content">
       <h3>${v.brand} ${v.name}</h3>
       <p><strong>Type:</strong> ${v.type}</p>
@@ -226,7 +226,7 @@ cancelBtn.addEventListener('click', resetForm);
 loadVehicles();
 
 async function showReviews(vehicleId) {
-  const res = await fetch(`https://ajmcars.onrender.com/api/reviews/${vehicleId}`);
+  const res = await fetch(`https://ajmcars-vohf.onrender.com/api/reviews/${vehicleId}`);
   const reviews = await res.json();
   reviewsSection.classList.remove('hidden');
   reviewsList.innerHTML = reviews.length === 0 ? '<p>No reviews available.</p>' :

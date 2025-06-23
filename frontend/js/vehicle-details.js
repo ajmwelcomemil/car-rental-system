@@ -1,4 +1,4 @@
-const API_BASE = 'https://ajmcars.onrender.com/api';
+const API_BASE = 'https://ajmcars-vohf.onrender.com/api';
 const vehicleDetailsEl = document.getElementById('vehicleDetails');
 const bookingSectionEl = document.getElementById('bookingSection');
 const pickupInput = document.getElementById('pickupDate');
@@ -43,7 +43,7 @@ async function loadVehicleDetails() {
 // Render vehicle card
 function renderVehicle(v) {
   vehicleDetailsEl.innerHTML = `
-    <img src="https://ajmcars.onrender.com/uploads/${v.images[0] || 'placeholder.jpg'}" alt="${v.name}">
+    <img src="https://ajmcars-vohf.onrender.com/uploads/${v.images[0] || 'placeholder.jpg'}" alt="${v.name}">
     <div class="vehicle-info">
       <h2>Brand - ${v.brand} </h2>
       <h2>Name - ${v.name}</h2>

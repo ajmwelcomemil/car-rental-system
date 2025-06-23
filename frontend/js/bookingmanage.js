@@ -1,4 +1,4 @@
-const API = 'https://ajmcars.onrender.com/api/admin/bookings';
+const API = 'https://ajmcars-vohf.onrender.com/api/admin/bookings';
 
 function renderBookings(data) {
   const container = document.getElementById('bookingsList');
@@ -58,7 +58,7 @@ async function fetchAll() {
   }
 
   try {
-    const res = await fetch('https://ajmcars.onrender.com/api/admin/bookings', {
+    const res = await fetch('https://ajmcars-vohf.onrender.com/api/admin/bookings', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`

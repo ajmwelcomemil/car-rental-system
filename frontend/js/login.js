@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     preloader.style.opacity = '1';
 
     try {
-      const response = await fetch('https://ajmcars.onrender.com/api/auth/login', {
+      const response = await fetch('https://ajmcars-vohf.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

@@ -15,7 +15,7 @@ function getAuthToken() {
 // Function to fetch dashboard stats (total users, bookings, vehicles)
 async function fetchDashboardStats() {
     try {
-        const response = await fetch('https://ajmcars.onrender.com/api/admin/dashboard/stats', {
+        const response = await fetch('https://ajmcars-vohf.onrender.com/api/admin/dashboard/stats', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${getAuthToken()}`  // Include token in headers
@@ -41,7 +41,7 @@ async function fetchDashboardStats() {
 // Function to fetch booking chart data
 async function fetchBookingChartData() {
     try {
-        const response = await fetch('https://ajmcars.onrender.com/api/admin/dashboard/charts/bookings', {
+        const response = await fetch('https://ajmcars-vohf.onrender.com/api/admin/dashboard/charts/bookings', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${getAuthToken()}`  // Include token in headers
@@ -90,7 +90,7 @@ async function fetchVehicleUsageChartData() {
         }
 
         // Make the API request with the Authorization header
-        const response = await fetch('https://ajmcars.onrender.com/api/admin/dashboard/charts/vehicles/usage', {
+        const response = await fetch('https://ajmcars-vohf.onrender.com/api/admin/dashboard/charts/vehicles/usage', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`  // Send token in Authorization header

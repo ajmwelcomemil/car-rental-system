@@ -1,4 +1,4 @@
-const APIF = 'https://ajmcars.onrender.com/api/vehicles';
+const APIF = 'https://ajmcars-vohf.onrender.com/api/vehicles';
 const grid = document.getElementById('vehiclesGrid');
 const loadAllBtn = document.getElementById('loadAllBtn');
 
@@ -53,7 +53,7 @@ function createCard(v) {
   card.dataset.available = v.availability;
 
   card.innerHTML = `
-    <img src="https://ajmcars.onrender.com/uploads/${v.images[0] || 'placeholder.jpg'}" alt="${v.name}">
+    <img src="https://ajmcars-vohf.onrender.com/uploads/${v.images[0] || 'placeholder.jpg'}" alt="${v.name}">
     <div class="card-content">
       <h3>${v.brand} ${v.name}</h3>
       <p><strong>Price/Day:</strong> ₹${v.pricePerDay}</p>

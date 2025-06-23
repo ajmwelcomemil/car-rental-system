@@ -1,4 +1,4 @@
-const BASE_URL = 'https://ajmcars.onrender.com/api/admin/dashboard';
+const BASE_URL = 'https://ajmcars-vohf.onrender.com/api/admin/dashboard';
 
 async function fetchVehicleUsageChartData() {
     try {
