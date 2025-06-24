@@ -1,11 +1,14 @@
 :root {
-  --color-primary: #2a2d72;
-  --color-accent: #f8c291;
-  --color-bg: #f4f6fc;
-  --color-card: white;
+  --color-primary: #e50914;       /* Netflix red */
+  --color-accent: #ffffff;        /* White accent */
+  --color-bg: #141414;            /* Netflix dark background */
+  --color-card: #1f1f1f;          /* Dark card background */
+  --color-border: #333;
   --radius: 12px;
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   --spacing: 1rem;
+  --text-light: #ccc;
+  --text-dark: #fff;
 }
 
 * {
@@ -15,16 +18,19 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: var(--color-bg);
-  color: #333;
+  color: var(--text-dark);
 }
+
+/* Container */
 .container {
   max-width: 1200px;
   margin: var(--spacing) auto;
   padding: 0 var(--spacing);
 }
 
+/* Controls */
 .controls {
   display: flex;
   flex-wrap: wrap;
@@ -36,27 +42,31 @@ body {
 .controls button {
   padding: 0.5rem 1rem;
   border-radius: var(--radius);
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
+  background-color: #2a2a2a;
+  color: var(--text-light);
 }
 
 .controls button {
-  background: var(--color-accent);
+  background: var(--color-primary);
+  color: var(--text-dark);
   border: none;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
 .controls button:hover {
-  background: #e1a76e;
+  background: #b00610;
 }
 
+/* Grid */
 .bookings-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--spacing);
 }
 
-/* Updated Booking Card */
+/* Booking Card */
 .booking-card {
   background: var(--color-card);
   border-radius: var(--radius);
@@ -68,7 +78,7 @@ body {
 
 .booking-card .card-header {
   background-color: var(--color-primary);
-  color: white;
+  color: var(--color-accent);
   padding: 0.75rem 1rem;
 }
 
@@ -80,6 +90,7 @@ body {
 .booking-card .card-body {
   padding: var(--spacing);
   flex-grow: 1;
+  color: var(--text-light);
 }
 
 .booking-card .card-body p {
@@ -90,13 +101,16 @@ body {
   width: 100%;
   padding: 0.5rem;
   border-radius: var(--radius);
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
+  background-color: #2a2a2a;
+  color: var(--text-light);
   margin-top: 0.25rem;
 }
 
+/* Footer */
 .booking-card .card-footer {
   padding: var(--spacing);
-  border-top: 1px solid #eee;
+  border-top: 1px solid #333;
   text-align: right;
 }
 
@@ -111,20 +125,28 @@ body {
 }
 
 .booking-card .btn:hover {
-  background: #1f215a;
+  background: #b00610;
 }
 
+/* No data */
 .no-data {
   grid-column: 1/-1;
   text-align: center;
-  color: #666;
+  color: #888;
   font-size: 1.1rem;
 }
+
+/* Home icon */
 .home-icon {
   position: absolute;
   top: 10px;
   left: 10px;
   font-size: 24px;
-  color: #000; /* You can change this color as per your design */
+  color: var(--color-accent);
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.home-icon:hover {
+  color: var(--color-primary);
 }

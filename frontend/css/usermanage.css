@@ -1,16 +1,20 @@
+/* Base Styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f9;
+  font-family: 'Poppins', sans-serif;
+  background-color: #141414;
+  color: #ffffff;
   margin: 0;
   padding: 0;
 }
 
+/* Container */
 .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 2rem;
 }
 
+/* Controls Section */
 .controls {
   display: flex;
   flex-wrap: wrap;
@@ -20,50 +24,59 @@ body {
 }
 
 .controls input[type="text"],
-.controls select,
-.controls button {
+.controls select {
   padding: 8px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #333;
+  background-color: #1f1f1f;
+  color: #fff;
 }
 
 .controls button {
-  background-color: #ffc107;
-  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
   border: none;
+  background-color: #e50914;
+  color: white;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .controls button:hover {
-  background-color: #289745;
+  background-color: #b00610;
 }
 
+/* Cards Grid */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
 }
 
+/* Card Style */
 .card {
-  background-color: white;
+  background-color: #1f1f1f;
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   transition: transform 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 
 .card h2 {
   margin-top: 0;
+  color: #ffffff;
 }
 
 .card .info p {
   margin: 0.5rem 0;
+  color: #ccc;
 }
 
+/* Actions */
 .card .actions {
   margin-top: 1rem;
   display: flex;
@@ -72,41 +85,51 @@ body {
 }
 
 .card button {
-  padding: 6px 10px;
+  padding: 6px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  color: white;
+  font-weight: 500;
 }
 
+/* Action Buttons */
 .card button.block {
-  background-color: #ff4d4f;
-  color: white;
+  background-color: #e50914;
 }
 
 .card button.unblock {
-  background-color: #c0392b;
-  color: white;
+  background-color: #b00610;
 }
 
 .card button.delete {
-  background-color: #289745;
-  color: white;
+  background-color: #ff9800;
 }
 
 .card button.edit {
-  background-color: #ffc107;
-  color: white;
+  background-color: #ffffff;
+  color: #141414;
 }
 
-/* Home icon */
+.card button.edit:hover {
+  background-color: #e50914;
+  color: #fff;
+}
+
+/* Home Icon */
 .home-icon {
   position: fixed;
   top: 15px;
   left: 15px;
   font-size: 1.5rem;
-  color: #000;
+  color: #ffffff;
   text-decoration: none;
   z-index: 1000;
+  transition: color 0.3s ease;
+}
+
+.home-icon:hover {
+  color: #e50914;
 }
 
 /* Modal Styles */
@@ -120,7 +143,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,53 +151,64 @@ body {
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: #1f1f1f;
   padding: 2rem;
   border-radius: 10px;
   width: 400px;
+  color: #ffffff;
   position: relative;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.8);
 }
 
 .modal-content h2 {
   margin-top: 0;
+  color: #e50914;
 }
 
 .modal-content label {
   display: block;
   margin-bottom: 10px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .modal-content input,
 .modal-content select {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   margin-top: 4px;
   margin-bottom: 1rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #333;
+  background-color: #2a2a2a;
+  color: #fff;
 }
 
 .modal-content button[type="submit"] {
   width: 100%;
-  padding: 10px;
-  background-color: #c0392b;
+  padding: 12px;
+  background-color: #e50914;
   border: none;
   border-radius: 5px;
   color: white;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .modal-content button[type="submit"]:hover {
-  background-color: #289745;
+  background-color: #b00610;
 }
 
+/* Close Button */
 .close-btn {
   position: absolute;
   top: 12px;
   right: 15px;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
-  color: #666;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #e50914;
 }

@@ -5,7 +5,7 @@ body { font-family: 'Poppins', sans-serif; background: #141414; color: white; ov
 /* Navbar */
 header { background: #000; padding: 20px; position: fixed; width: 100%; z-index: 10; }
 .navbar { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
-.logo a { font-size: 26px; font-weight: bold; color: #ffffff; text-decoration: none; }
+.logo a { font-size: 18px; font-weight: bold; color: #ffffff; text-decoration: none; }
 .nav-links { list-style: none; display: flex; gap: 20px; }
 .nav-links li a { color: white; padding: 8px 14px; transition: background 0.3s; border-radius: 5px; }
 .nav-links li a:hover { background: #e50914; }

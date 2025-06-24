@@ -6,16 +6,19 @@
   <title>Car Rental System</title>
   <link rel="stylesheet" href="css/userdashboard.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 <body>
+
   <!-- Header Section -->
   <header>
     <nav>
       <div class="logo">
+        <a href="#"> AJM Car Rental</a>
       </div>
-      <ul>
+
+      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+
+      <ul class="nav-links">
         <li><a href="vehicles.html">View Vehicles</a></li>
         <li><a href="booking-history.html">My Bookings</a></li>
         <li><a href="profile.html">My Profile</a></li>
@@ -33,6 +36,13 @@
     </div>
   </section>
 
-  <script src="js/index.js"></script>
+  <script>
+    const toggleBtn = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    toggleBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>

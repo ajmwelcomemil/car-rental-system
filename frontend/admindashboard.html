@@ -16,14 +16,18 @@
 </head>
 <body>
 
-  <!-- Home icon -->
-  <a href="index.html" class="home-icon">
-    <i class="fas fa-home"></i>
-  </a>
-
+  <!-- Header with toggle -->
   <header>
     <nav>
-      <ul>
+      <div class="logo">
+        <a href="#">AJM Car Rental</a>
+      </div>
+
+      <button class="menu-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <ul class="nav-links">
         <li><a href="vehiclemanage.html">Manage Vehicles</a></li>
         <li><a href="bookingmanage.html">Manage Bookings</a></li>
         <li><a href="usermanage.html" class="active">Manage Users</a></li>
@@ -32,6 +36,7 @@
     </nav>
   </header>
 
+  <!-- Dashboard Content -->
   <section class="dashboard-container">
     <div class="dashboard-stats">
       <div class="stat-item">
@@ -60,6 +65,15 @@
     </div>
   </section>
 
+  <!-- JS -->
   <script src="js/admindashboard.js"></script>
+  <script>
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".nav-links");
+
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+    });
+  </script>
 </body>
 </html>
