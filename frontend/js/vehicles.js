@@ -12,14 +12,7 @@ async function loadVehicles() {
     if (!res.ok) throw new Error('Failed to load vehicles');
     const list = await res.json();
     renderVehicles(list);
-    Toastify({
-      text: "Vehicles loaded successfully!",
-      duration: 2000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#4caf50",
-      stopOnFocus: true,
-    }).showToast();
+    // Removed: Toastify for success message
   } catch (error) {
     console.error(error);
     grid.innerHTML = `<p class="error">Unable to load vehicles. Please try again later.</p>`;
@@ -73,36 +66,33 @@ function createCard(v) {
   return card;
 }
 
-// 4. Filter logic with improved fuel type comparison
+// 4. Filter logic
 document.getElementById('applyFilters').addEventListener('click', () => {
   const type = document.getElementById('filterType').value.trim();
   const fuel = document.getElementById('filterFuel').value.trim();
   const avail = document.getElementById('filterAvailability').value.trim();
 
   fetch(APIF)
-  .then(res => res.json())
-  .then(vehicles => {
-    console.log('All vehicles:', vehicles); // DEBUG
-    vehicles.forEach(v => console.log(`Vehicle: ${v.name}, Fuel: ${v.fuelType}`)); // DEBUG
+    .then(res => res.json())
+    .then(vehicles => {
+      const filteredVehicles = vehicles.filter(v => {
+        const okType = !type || v.type.trim().toLowerCase() === type.toLowerCase();
+        const okFuel = !fuel || v.fuelType.trim().toLowerCase() === fuel.toLowerCase();
+        const okAvail = !avail || String(v.availability).toLowerCase() === avail.toLowerCase();
+        return okType && okFuel && okAvail;
+      });
 
-    const filteredVehicles = vehicles.filter(v => {
-      const okType = !type || v.type.trim().toLowerCase() === type.toLowerCase();
-      const okFuel = !fuel || v.fuelType.trim().toLowerCase() === fuel.toLowerCase();
-      const okAvail = !avail || String(v.availability).toLowerCase() === avail.toLowerCase();
-      return okType && okFuel && okAvail;
-    });
+      renderVehicles(filteredVehicles);
 
-    renderVehicles(filteredVehicles);
-    Toastify({
-      text: "Filters applied!",
-      duration: 2000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#4caf50",
-      stopOnFocus: true,
-    }).showToast();
-  })
-
+      Toastify({
+        text: "Filters applied!",
+        duration: 2000,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "#4caf50",
+        stopOnFocus: true,
+      }).showToast();
+    })
     .catch(error => {
       console.error(error);
       grid.innerHTML = `<p class="error">Unable to apply filters. Please try again later.</p>`;

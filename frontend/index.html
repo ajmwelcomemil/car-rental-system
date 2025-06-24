@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Rental System</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AJM Car Rental</title>
+  <link rel="stylesheet" href="css/index.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <script defer src="js/index.js"></script>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="#">Car Rental System</a>
-            </div>
-            <ul>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="register.html">Register</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo"><a href="#">AJM Car Rental</a></div>
+      <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome to Our Car Rental Service</h1>
-            <p>Find your perfect vehicle and enjoy the ride of your life!</p>
-            <a href="register.html" class="btn-primary">Browse Vehicles</a>
-        </div>
-    </section>
+  <!-- Hero Slideshow Section -->
+  <section class="hero">
+    <div class="slide slide1"></div>
+    <div class="slide slide2"></div>
+    <div class="slide slide3"></div>
+    <div class="slide slide4"></div>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1 class="fade-in">Drive in Style with AJM Cars</h1>
+      <p class="fade-in delay-1">Luxury Cars. Unmatched Prices. Anywhere. Anytime.</p>
+      <a href="register.html" class="btn-primary fade-in delay-2">Browse Vehicles</a>
+    </div>
+  </section>
 </body>
 </html>
