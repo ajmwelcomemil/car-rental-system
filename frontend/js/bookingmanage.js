@@ -26,8 +26,8 @@ function renderBookings(data) {
         <h3>Booking ID: <span>${booking._id}</span></h3>
       </div>
       <div class="card-body">
-        <p><strong>User:</strong> ${userName} <br> 
-        <p><small>Email:${userEmail}</small></p>
+        <p><strong>User:</strong> ${userName}</p>
+        <p><small>Email: ${userEmail}</small></p>
         <p><strong>Vehicle:</strong> ${vehicleBrand} ${vehicleName}</p>
         <p><strong>Pickup:</strong> ${pickupDate}</p>
         <p><strong>Drop-off:</strong> ${dropoffDate}</p>
@@ -44,7 +44,6 @@ function renderBookings(data) {
       </div>
     `;
 
-    // Attach event handler for status update
     card.querySelector('button').addEventListener('click', updateStatus);
     container.appendChild(card);
   });
@@ -52,13 +51,10 @@ function renderBookings(data) {
 
 async function fetchAll() {
   const token = localStorage.getItem('authToken');
-  if (!token) {
-    showErrorToast('You must be logged in as an admin to view bookings.');
-    return;
-  }
+  if (!token) return showErrorToast('You must be logged in as an admin to view bookings.');
 
   try {
-    const res = await fetch('https://ajmcars-vohf.onrender.com/api/admin/bookings', {
+    const res = await fetch(API, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -66,10 +62,7 @@ async function fetchAll() {
     });
 
     const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.message || 'Failed to fetch bookings');
-    }
+    if (!res.ok) throw new Error(data.message || 'Failed to fetch bookings');
 
     renderBookings(data);
   } catch (err) {
@@ -82,10 +75,7 @@ async function fetchByUser() {
   if (!userId) return showErrorToast('Enter User ID');
 
   const token = localStorage.getItem('authToken');
-  if (!token) {
-    showErrorToast('You must be logged in to perform this action.');
-    return;
-  }
+  if (!token) return showErrorToast('You must be logged in to perform this action.');
 
   try {
     const res = await fetch(`${API}/user/${userId}`, {
@@ -96,11 +86,7 @@ async function fetchByUser() {
     });
 
     const data = await res.json();
-    console.log('Fetched bookings data:', data);  // Log the data here
-
-    if (!res.ok) {
-      throw new Error(data.message || 'Failed to fetch bookings by user');
-    }
+    if (!res.ok) throw new Error(data.message || 'Failed to fetch bookings by user');
 
     renderBookings(data);
   } catch (err) {
@@ -113,10 +99,7 @@ async function fetchByVehicle() {
   if (!vehicleId) return showErrorToast('Enter Vehicle ID');
 
   const token = localStorage.getItem('authToken');
-  if (!token) {
-    showErrorToast('You must be logged in to perform this action.');
-    return;
-  }
+  if (!token) return showErrorToast('You must be logged in to perform this action.');
 
   try {
     const res = await fetch(`${API}/vehicle/${vehicleId}`, {
@@ -127,10 +110,7 @@ async function fetchByVehicle() {
     });
 
     const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.message || 'Failed to fetch bookings by vehicle');
-    }
+    if (!res.ok) throw new Error(data.message || 'Failed to fetch bookings by vehicle');
 
     renderBookings(data);
   } catch (err) {
@@ -138,59 +118,12 @@ async function fetchByVehicle() {
   }
 }
 
-// Update status
-async function updateStatus(e) {
-  const id = e.target.dataset.id;
-  const select = document.querySelector(`select[data-id="${id}"]`);
-  const status = select.value;
-
-  const token = localStorage.getItem('authToken');
-  if (!token) {
-    showErrorToast('You must be logged in to update the status.');
-    return;
-  }
-
-  try {
-    const res = await fetch(`${API}/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`  // Include token in header
-      },
-      body: JSON.stringify({ status })
-    });
-
-    const json = await res.json();
-
-    if (res.ok) {
-      showSuccessToast('Status updated');
-      select.value = status;  // Update the selected status in the UI
-    } else {
-      throw new Error(json.message || 'Failed to update status');
-    }
-  } catch (error) {
-    showErrorToast('Error: ' + error.message);
-  }
-}
-
-// Wire up buttons
-document.getElementById('loadAll').onclick = fetchAll;
-document.getElementById('loadByUser').onclick = fetchByUser;
-document.getElementById('loadByVehicle').onclick = fetchByVehicle;
-document.getElementById('loadByStatus').onclick = fetchByStatus;
-
-// Initial load
-fetchAll();
-
 async function fetchByStatus() {
   const status = document.getElementById('statusFilter').value.trim();
   const token = localStorage.getItem('authToken');
-  if (!token) {
-    showErrorToast('You must be logged in as an admin to filter by status.');
-    return;
-  }
+  if (!token) return showErrorToast('You must be logged in as an admin to filter by status.');
 
-  const url = status ? `${API}?status=${status}` : `${API}`; // Include status filter in the URL if selected
+  const url = status ? `${API}?status=${status}` : API;
 
   try {
     const res = await fetch(url, {
@@ -201,9 +134,7 @@ async function fetchByStatus() {
     });
 
     const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.message || 'Failed to fetch bookings by status');
-    }
+    if (!res.ok) throw new Error(data.message || 'Failed to fetch bookings by status');
 
     renderBookings(data);
   } catch (err) {
@@ -211,25 +142,61 @@ async function fetchByStatus() {
   }
 }
 
-// Toastify Notifications
-function showSuccessToast(message) {
-  Toastify({
-    text: message,
-    duration: 3000,
-    gravity: "top",
-    position: "center",
-    backgroundColor: "#4caf50",  // Green for success
-    stopOnFocus: true
-  }).showToast();
+async function updateStatus(e) {
+  const id = e.target.dataset.id;
+  const select = document.querySelector(`select[data-id="${id}"]`);
+  const status = select.value;
+
+  const token = localStorage.getItem('authToken');
+  if (!token) return showErrorToast('You must be logged in to update the status.');
+
+  try {
+    const res = await fetch(`${API}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ status })
+    });
+
+    const json = await res.json();
+    if (res.ok) {
+      showSuccessToast('Status updated');
+    } else {
+      throw new Error(json.message || 'Failed to update status');
+    }
+  } catch (error) {
+    showErrorToast('Error: ' + error.message);
+  }
 }
 
-function showErrorToast(message) {
-  Toastify({
+// ✅ SweetAlert2: Success Toast
+function showSuccessToast(message) {
+  Swal.fire({
+    icon: 'success',
+    title: 'Success',
     text: message,
-    duration: 3000,
-    gravity: "top",
-    position: "center",
-    backgroundColor: "#ff6b6b",  // Red for error
-    stopOnFocus: true
-  }).showToast();
+    timer: 2000,
+    showConfirmButton: false
+  });
 }
+
+// ✅ SweetAlert2: Error Toast
+function showErrorToast(message) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: message,
+    confirmButtonColor: '#ff6b6b'
+  });
+}
+
+// Button bindings
+document.getElementById('loadAll').onclick = fetchAll;
+document.getElementById('loadByUser').onclick = fetchByUser;
+document.getElementById('loadByVehicle').onclick = fetchByVehicle;
+document.getElementById('loadByStatus').onclick = fetchByStatus;
+
+// Initial fetch
+fetchAll();

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const token = localStorage.getItem('authToken');
 
   const res = await fetch('https://ajmcars-vohf.onrender.com/api/users/profile', {
-      headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${token}` }
   });
 
   const data = await res.json();
@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('createdAt').textContent = `Member Since: ${new Date(data.createdAt).toDateString()}`;
 
   document.getElementById('profilePic').src = data.profilePic
-      ? `https://ajmcars-vohf.onrender.com${data.profilePic}`
-      : 'https://via.placeholder.com/150?text=No+Image';
+    ? `https://ajmcars-vohf.onrender.com${data.profilePic}`
+    : 'https://via.placeholder.com/150?text=No+Image';
 
   // Pre-fill edit form
   const form = document.getElementById('editProfileForm');
@@ -39,23 +39,29 @@ document.getElementById('editProfileForm').addEventListener('submit', async (e) 
   const formData = new FormData(e.target);
 
   try {
-      const res = await fetch('https://ajmcars-vohf.onrender.com/api/users/profile', {
-          method: 'PUT',
-          headers: {
-              Authorization: `Bearer ${token}`
-          },
-          body: formData
-      });
+    const res = await fetch('https://ajmcars-vohf.onrender.com/api/users/profile', {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      body: formData
+    });
 
-      if (res.ok) {
-          showSuccessToast("Profile updated successfully!");
-          location.reload();
-      } else {
-          const data = await res.json();
-          showErrorToast(data.message || "Failed to update profile.");
-      }
+    if (res.ok) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Profile updated successfully!',
+        timer: 2000,
+        showConfirmButton: false
+      });
+      setTimeout(() => location.reload(), 2000);
+    } else {
+      const data = await res.json();
+      showErrorAlert(data.message || "Failed to update profile.");
+    }
   } catch (err) {
-      showErrorToast("Error: " + err.message);
+    showErrorAlert("Error: " + err.message);
   }
 });
 
@@ -66,46 +72,39 @@ document.getElementById('resetPasswordForm').addEventListener('submit', async (e
   const password = e.target.password.value;
 
   try {
-      const res = await fetch('https://ajmcars-vohf.onrender.com/api/users/profile', {
-          method: 'PUT',
-          headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ password })
-      });
+    const res = await fetch('https://ajmcars-vohf.onrender.com/api/users/profile', {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ password })
+    });
 
-      if (res.ok) {
-          showSuccessToast("Password updated successfully!");
-          closeModal('resetPasswordModal');
-      } else {
-          const data = await res.json();
-          showErrorToast(data.message || "Password update failed.");
-      }
+    if (res.ok) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Password Updated',
+        text: 'Password updated successfully!',
+        timer: 2000,
+        showConfirmButton: false
+      });
+      closeModal('resetPasswordModal');
+    } else {
+      const data = await res.json();
+      showErrorAlert(data.message || "Password update failed.");
+    }
   } catch (err) {
-      showErrorToast("Error: " + err.message);
+    showErrorAlert("Error: " + err.message);
   }
 });
 
-// Toastify Notifications
-function showSuccessToast(message) {
-  Toastify({
-      text: message,
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#4caf50",  // Green for success
-      stopOnFocus: true
-  }).showToast();
-}
-
-function showErrorToast(message) {
-  Toastify({
-      text: message,
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",  // Red for error
-      stopOnFocus: true
-  }).showToast();
+// SweetAlert2 Notifications
+function showErrorAlert(message) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops!',
+    text: message,
+    confirmButtonColor: '#ff6b6b'
+  });
 }

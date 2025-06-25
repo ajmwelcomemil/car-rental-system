@@ -30,17 +30,12 @@ function renderUsers(users) {
       <div class="actions">
         ${isBlocked
           ? `<button class="unblock" data-id="${u._id}">Unblock</button>`
-          : `<button class="block" data-id="${u._id}">Block</button>`
-        }
+          : `<button class="block" data-id="${u._id}">Block</button>`}
         <button class="edit" data-id="${u._id}">Edit</button>
         <button class="delete" data-id="${u._id}">Delete</button>
       </div>
     `;
-    if (isBlocked) {
-      card.querySelector('.unblock').onclick = unblockUser;
-    } else {
-      card.querySelector('.block').onclick = blockUser;
-    }
+    (isBlocked ? card.querySelector('.unblock') : card.querySelector('.block')).onclick = isBlocked ? unblockUser : blockUser;
     card.querySelector('.edit').onclick = () => openEditModal(u);
     card.querySelector('.delete').onclick = deleteUser;
     grid.appendChild(card);
@@ -52,14 +47,7 @@ async function loadAll() {
     const users = await fetchUsers();
     renderUsers(users);
   } catch (err) {
-    Toastify({
-      text: 'Error: ' + err.message,
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-      stopOnFocus: true
-    }).showToast();
+    showErrorToast('Error: ' + err.message);
   }
 }
 
@@ -75,28 +63,11 @@ async function searchUsers() {
     const res = await fetch(url, {
       headers: { 'Content-Type': 'application/json', ...getAuthHeaders() }
     });
-    if (res.ok) {
-      const users = await res.json();
-      renderUsers(users);
-    } else {
-      Toastify({
-        text: 'Error fetching users',
-        duration: 3000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#ff6b6b",
-        stopOnFocus: true
-      }).showToast();
-    }
+    const users = await res.json();
+    if (!res.ok) throw new Error('Failed to fetch users');
+    renderUsers(users);
   } catch (err) {
-    Toastify({
-      text: 'Error: ' + err.message,
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-      stopOnFocus: true
-    }).showToast();
+    showErrorToast('Error: ' + err.message);
   }
 }
 
@@ -108,24 +79,10 @@ async function blockUser(e) {
       headers: { 'Content-Type': 'application/json', ...getAuthHeaders() }
     });
     if (!res.ok) throw new Error((await res.json()).message);
-    Toastify({
-      text: 'User blocked',
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#4caf50",
-      stopOnFocus: true
-    }).showToast();
+    showSuccessToast('User blocked');
     loadAll();
   } catch (err) {
-    Toastify({
-      text: 'Error: ' + err.message,
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-      stopOnFocus: true
-    }).showToast();
+    showErrorToast('Error: ' + err.message);
   }
 }
 
@@ -136,56 +93,39 @@ async function unblockUser(e) {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...getAuthHeaders() }
     });
-    const json = await res.json();
-    if (!res.ok) throw new Error(json.message || `Server ${res.status}`);
-    Toastify({
-      text: 'User unblocked',
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#4caf50",
-      stopOnFocus: true
-    }).showToast();
+    if (!res.ok) throw new Error((await res.json()).message);
+    showSuccessToast('User unblocked');
     loadAll();
   } catch (err) {
-    Toastify({
-      text: 'Error: ' + err.message,
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-      stopOnFocus: true
-    }).showToast();
+    showErrorToast('Error: ' + err.message);
   }
 }
 
 async function deleteUser(e) {
-  if (!confirm('Delete this user?')) return;
   const id = e.target.dataset.id;
+
+  const confirm = await Swal.fire({
+    title: 'Are you sure?',
+    text: "This action cannot be undone!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#aaa',
+    confirmButtonText: 'Yes, delete it!'
+  });
+
+  if (!confirm.isConfirmed) return;
+
   try {
     const res = await fetch(`${API}/${id}`, {
       method: 'DELETE',
       headers: getAuthHeaders()
     });
     if (!res.ok) throw new Error((await res.json()).message);
-    Toastify({
-      text: 'User deleted',
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#4caf50",
-      stopOnFocus: true
-    }).showToast();
+    showSuccessToast('User deleted');
     loadAll();
   } catch (err) {
-    Toastify({
-      text: 'Error: ' + err.message,
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-      stopOnFocus: true
-    }).showToast();
+    showErrorToast('Error: ' + err.message);
   }
 }
 
@@ -223,25 +163,11 @@ document.getElementById('editForm').onsubmit = async function (e) {
       body: JSON.stringify(data)
     });
     if (!res.ok) throw new Error((await res.json()).message);
-    Toastify({
-      text: 'User updated successfully',
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#4caf50",
-      stopOnFocus: true
-    }).showToast();
+    showSuccessToast('User updated successfully');
     document.getElementById('editModal').classList.add('hidden');
     loadAll();
   } catch (err) {
-    Toastify({
-      text: 'Error: ' + err.message,
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-      stopOnFocus: true
-    }).showToast();
+    showErrorToast('Error: ' + err.message);
   }
 };
 

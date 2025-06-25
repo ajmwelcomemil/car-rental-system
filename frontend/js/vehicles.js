@@ -12,18 +12,16 @@ async function loadVehicles() {
     if (!res.ok) throw new Error('Failed to load vehicles');
     const list = await res.json();
     renderVehicles(list);
-    // Removed: Toastify for success message
+    // No popup on success (as per original code)
   } catch (error) {
     console.error(error);
     grid.innerHTML = `<p class="error">Unable to load vehicles. Please try again later.</p>`;
-    Toastify({
+    Swal.fire({
+      icon: 'error',
+      title: 'Failed to Load',
       text: `Error: ${error.message}`,
-      duration: 4000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-      stopOnFocus: true,
-    }).showToast();
+      confirmButtonColor: '#ff6b6b'
+    });
   }
 }
 
@@ -84,26 +82,23 @@ document.getElementById('applyFilters').addEventListener('click', () => {
 
       renderVehicles(filteredVehicles);
 
-      Toastify({
-        text: "Filters applied!",
-        duration: 2000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#4caf50",
-        stopOnFocus: true,
-      }).showToast();
+      Swal.fire({
+        icon: 'success',
+        title: 'Filters Applied',
+        text: `${filteredVehicles.length} result(s) found`,
+        timer: 1500,
+        showConfirmButton: false
+      });
     })
     .catch(error => {
       console.error(error);
       grid.innerHTML = `<p class="error">Unable to apply filters. Please try again later.</p>`;
-      Toastify({
-        text: `Filter error: ${error.message}`,
-        duration: 4000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#ff6b6b",
-        stopOnFocus: true,
-      }).showToast();
+      Swal.fire({
+        icon: 'error',
+        title: 'Filter Error',
+        text: error.message,
+        confirmButtonColor: '#ff6b6b'
+      });
     });
 });
 
@@ -114,14 +109,12 @@ document.getElementById('clearFilters').addEventListener('click', () => {
   document.getElementById('filterAvailability').value = '';
   loadVehicles();
 
-  Toastify({
-    text: "Filters cleared.",
-    duration: 2000,
-    gravity: "top",
-    position: "center",
-    backgroundColor: "#2196f3",
-    stopOnFocus: true,
-  }).showToast();
+  Swal.fire({
+    icon: 'info',
+    title: 'Filters Cleared',
+    timer: 1200,
+    showConfirmButton: false
+  });
 });
 
 // Initial load

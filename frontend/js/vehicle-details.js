@@ -28,15 +28,13 @@ async function loadVehicleDetails() {
     renderVehicle(vehicle);
     bookingSectionEl.style.display = 'block';
   } catch (err) {
-    Toastify({
-      text: 'Failed to load vehicle details.',
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-      stopOnFocus: true
-    }).showToast();
     console.error(err);
+    Swal.fire({
+      icon: 'error',
+      title: 'Failed to Load',
+      text: 'Failed to load vehicle details.',
+      confirmButtonColor: '#ff6b6b'
+    });
   }
 }
 
@@ -75,92 +73,83 @@ function calculateSummary() {
 
 // Confirm booking
 confirmBtn.addEventListener('click', async () => {
-    const pickupDate = pickupInput.value;
-    const dropoffDate = dropoffInput.value;
-    const token = localStorage.getItem('authToken');
-    
-    // Check if pickup and dropoff dates are selected
-    if (!pickupDate || !dropoffDate) {
-      Toastify({
-        text: 'Please select both pickup and drop-off dates.',
-        duration: 3000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#ff6b6b",
-        stopOnFocus: true
-      }).showToast();
-      return;
+  const pickupDate = pickupInput.value;
+  const dropoffDate = dropoffInput.value;
+  const token = localStorage.getItem('authToken');
+
+  // Validations
+  if (!pickupDate || !dropoffDate) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Missing Dates',
+      text: 'Please select both pickup and drop-off dates.',
+      confirmButtonColor: '#ff6b6b'
+    });
+    return;
+  }
+
+  const days = parseInt(totalDaysEl.textContent);
+  if (days <= 0) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Invalid Date Range',
+      text: 'Drop-off date must be after pickup date.',
+      confirmButtonColor: '#ff6b6b'
+    });
+    return;
+  }
+
+  if (!vehicle || !vehicle._id) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Missing Vehicle Info',
+      text: 'Vehicle information is missing.',
+      confirmButtonColor: '#ff6b6b'
+    });
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/bookings/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        vehicleId: vehicle._id,
+        pickupDate,
+        dropoffDate
+      })
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message || 'Booking failed.');
     }
-  
-    const days = parseInt(totalDaysEl.textContent);
-    
-    // Check if drop-off date is after pickup date
-    if (days <= 0) {
-      Toastify({
-        text: 'Drop-off date must be after pickup date.',
-        duration: 3000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#ff6b6b",
-        stopOnFocus: true
-      }).showToast();
-      return;
-    }
-  
-    // Check if vehicleId exists (ensure vehicle is loaded properly)
-    if (!vehicle || !vehicle._id) {
-      Toastify({
-        text: 'Vehicle information is missing.',
-        duration: 3000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#ff6b6b",
-        stopOnFocus: true
-      }).showToast();
-      return;
-    }
-  
-    try {
-      // Make the API request to create a booking
-      const res = await fetch(`${API_BASE}/bookings/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          vehicleId: vehicle._id,   // ✅ Use vehicleId correctly
-          pickupDate,
-          dropoffDate
-        })
-      });
-  
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message || 'Booking failed.');
-      }
-  
-      Toastify({
-        text: 'Booking confirmed!',
-        duration: 3000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#4caf50",
-        stopOnFocus: true
-      }).showToast();
-      window.location.href = 'booking-history.html'; // redirect to bookings page
-    } catch (err) {
-      console.error(err);
-      Toastify({
-        text: 'Failed to create booking: ' + err.message,
-        duration: 3000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#ff6b6b",
-        stopOnFocus: true
-      }).showToast();
-    }
-  });
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Booking Confirmed',
+      text: 'Your booking has been successfully created!',
+      timer: 2000,
+      showConfirmButton: false
+    });
+
+    setTimeout(() => {
+      window.location.href = 'booking-history.html';
+    }, 2000);
+
+  } catch (err) {
+    console.error(err);
+    Swal.fire({
+      icon: 'error',
+      title: 'Booking Failed',
+      text: err.message,
+      confirmButtonColor: '#ff6b6b'
+    });
+  }
+});
 
 // Recalculate on date change
 pickupInput.addEventListener('change', calculateSummary);

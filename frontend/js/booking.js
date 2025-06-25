@@ -11,22 +11,32 @@ let vehicleData;
 
 async function fetchVehicleDetails() {
   const token = localStorage.getItem('authToken');
-  const res = await fetch(`https://ajmcars-vohf.onrender.com/api/vehicles/${vehicleId}`, {
-    headers: { 'Authorization': `Bearer ${token}` },
-  });
-  vehicleData = await res.json();
+  try {
+    const res = await fetch(`https://ajmcars-vohf.onrender.com/api/vehicles/${vehicleId}`, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+
+    if (!res.ok) throw new Error('Vehicle not found');
+    vehicleData = await res.json();
+  } catch (err) {
+    showErrorToast('Failed to fetch vehicle details.');
+    console.error(err);
+  }
 }
 
 function calculateBooking() {
   const pickupDate = new Date(pickupDateInput.value);
   const dropoffDate = new Date(dropoffDateInput.value);
 
-  if (pickupDate && dropoffDate && dropoffDate > pickupDate) {
+  if (pickupDate && dropoffDate && dropoffDate > pickupDate && vehicleData?.pricePerDay) {
     const totalDays = Math.ceil((dropoffDate - pickupDate) / (1000 * 60 * 60 * 24));
     const totalAmount = totalDays * vehicleData.pricePerDay;
 
     totalDaysInput.value = totalDays;
     totalAmountInput.value = totalAmount;
+  } else {
+    totalDaysInput.value = '';
+    totalAmountInput.value = '';
   }
 }
 
@@ -50,48 +60,53 @@ confirmBookingBtn.addEventListener('click', async () => {
       totalAmount,
     };
 
-    const res = await fetch('https://ajmcars-vohf.onrender.com/api/bookings', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(bookingDetails),
-    });
+    try {
+      const res = await fetch('https://ajmcars-vohf.onrender.com/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingDetails),
+      });
 
-    if (res.ok) {
-      showSuccessToast('Booking Confirmed!');
-      window.location.href = '/my-bookings.html'; // Redirect to user's bookings page
-    } else {
-      showErrorToast('Booking failed. Please try again.');
+      if (res.ok) {
+        showSuccessToast('Booking Confirmed!');
+        setTimeout(() => {
+          window.location.href = '/my-bookings.html';
+        }, 1500);
+      } else {
+        const data = await res.json();
+        showErrorToast(data.message || 'Booking failed. Please try again.');
+      }
+    } catch (err) {
+      console.error(err);
+      showErrorToast('Network error. Please try again.');
     }
   } else {
     showErrorToast('Please fill in all the details.');
   }
 });
 
-// Function to show a success toast notification
+// ✅ SweetAlert2 Success Notification
 function showSuccessToast(message) {
-  Toastify({
+  Swal.fire({
+    icon: 'success',
+    title: 'Success',
     text: message,
-    duration: 3000,
-    gravity: "top",
-    position: "center",
-    backgroundColor: "#4caf50",  // Green for success
-    stopOnFocus: true
-  }).showToast();
+    timer: 2000,
+    showConfirmButton: false
+  });
 }
 
-// Function to show an error toast notification
+// ✅ SweetAlert2 Error Notification
 function showErrorToast(message) {
-  Toastify({
+  Swal.fire({
+    icon: 'error',
+    title: 'Error',
     text: message,
-    duration: 3000,
-    gravity: "top",
-    position: "center",
-    backgroundColor: "#ff6b6b",  // Red for error
-    stopOnFocus: true
-  }).showToast();
+    confirmButtonColor: '#ff6b6b'
+  });
 }
 
 // Initial data fetch

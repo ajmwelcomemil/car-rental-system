@@ -15,9 +15,7 @@ let editId = null;
 async function loadVehicles() {
   const token = localStorage.getItem('authToken');
   const res = await fetch(APIF, {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
+    headers: { 'Authorization': `Bearer ${token}` }
   });
   const list = await res.json();
   grid.innerHTML = '';
@@ -44,7 +42,6 @@ function createCard(v) {
       <button class="review" data-id="${v._id}">View Reviews</button>
     </div>
   `;
-
   card.querySelector('.edit').onclick = () => startEdit(v);
   card.querySelector('.toggle').onclick = () => toggleAvailability(v._id);
   card.querySelector('.delete').onclick = () => deleteVehicle(v._id);
@@ -64,29 +61,15 @@ form.onsubmit = async e => {
   const res = await fetch(url, {
     method,
     body: data,
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
+    headers: { 'Authorization': `Bearer ${token}` }
   });
-
   const json = await res.json();
+
   if (res.ok) {
-    Toastify({
-      text: json.message,
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#4caf50",
-    }).showToast();
+    Swal.fire({ icon: 'success', text: json.message, timer: 2000, showConfirmButton: false });
     afterGridAction();
   } else {
-    Toastify({
-      text: 'Error: ' + json.message,
-      duration: 4000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-    }).showToast();
+    Swal.fire({ icon: 'error', text: json.message, timer: 3000, showConfirmButton: false });
   }
 };
 
@@ -127,89 +110,63 @@ async function toggleAvailability(id) {
   const token = localStorage.getItem('authToken');
   const res = await fetch(`${API}/${id}/availability`, {
     method: 'PATCH',
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
+    headers: { 'Authorization': `Bearer ${token}` }
   });
   const json = await res.json();
+
   if (res.ok) {
-    Toastify({
-      text: json.message,
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#4caf50",
-    }).showToast();
+    Swal.fire({ icon: 'success', text: json.message, timer: 2000, showConfirmButton: false });
     loadVehicles();
   } else {
-    Toastify({
-      text: 'Error: ' + json.message,
-      duration: 4000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-    }).showToast();
+    Swal.fire({ icon: 'error', text: json.message, timer: 3000, showConfirmButton: false });
   }
 }
 
 async function deleteVehicle(id) {
-  if (!window.confirm('Delete this vehicle?')) return;
+  const result = await Swal.fire({
+    icon: 'warning',
+    title: 'Are you sure?',
+    text: 'This will permanently delete the vehicle.',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  });
+
+  if (!result.isConfirmed) return;
+
   const token = localStorage.getItem('authToken');
   const res = await fetch(`${API}/${id}`, {
     method: 'DELETE',
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
+    headers: { 'Authorization': `Bearer ${token}` }
   });
+
   const json = await res.json();
+
   if (res.ok) {
-    Toastify({
-      text: json.message,
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#4caf50",
-    }).showToast();
+    Swal.fire({ icon: 'success', text: json.message, timer: 2000, showConfirmButton: false });
     loadVehicles();
   } else {
-    Toastify({
-      text: 'Error: ' + json.message,
-      duration: 4000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-    }).showToast();
+    Swal.fire({ icon: 'error', text: json.message, timer: 3000, showConfirmButton: false });
   }
 }
 
 document.getElementById('loadOneBtn').onclick = async () => {
   let id = document.getElementById('singleId').value.trim();
   if (!id) {
-    Toastify({
-      text: 'Enter a valid Vehicle ID',
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-    }).showToast();
+    Swal.fire({ icon: 'warning', text: 'Enter a valid Vehicle ID', timer: 2000, showConfirmButton: false });
     return;
   }
+
   const token = localStorage.getItem('authToken');
   const res = await fetch(`${APIF}/${id}`, {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
+    headers: { 'Authorization': `Bearer ${token}` }
   });
+
   if (!res.ok) {
-    Toastify({
-      text: 'Invalid Vehicle ID',
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-    }).showToast();
+    Swal.fire({ icon: 'error', text: 'Invalid Vehicle ID', timer: 2000, showConfirmButton: false });
     return;
   }
+
   const vehicle = await res.json();
   grid.innerHTML = '';
   grid.appendChild(createCard(vehicle));
@@ -228,12 +185,14 @@ loadVehicles();
 async function showReviews(vehicleId) {
   const res = await fetch(`https://ajmcars-vohf.onrender.com/api/reviews/${vehicleId}`);
   const reviews = await res.json();
+
   reviewsSection.classList.remove('hidden');
-  reviewsList.innerHTML = reviews.length === 0 ? '<p>No reviews available.</p>' :
-    reviews.map(r => `
-      <div class="review-item">
-        <p><strong>${r.user?.name || 'Anonymous'}:</strong> ${r.comment}</p>
-        <p><em>${r.rating} / 5 stars</em></p>
-      </div>
-    `).join('');
+  reviewsList.innerHTML = reviews.length === 0
+    ? '<p>No reviews available.</p>'
+    : reviews.map(r => `
+        <div class="review-item">
+          <p><strong>${r.user?.name || 'Anonymous'}:</strong> ${r.comment}</p>
+          <p><em>${r.rating} / 5 stars</em></p>
+        </div>
+      `).join('');
 }
