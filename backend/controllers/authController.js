@@ -84,6 +84,8 @@ if (phoneExists) {
 };
 
 exports.login = async (req, res) => {
+  console.time("LoginTotal"); // ⏱ Start full timer
+
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -91,28 +93,38 @@ exports.login = async (req, res) => {
   }
 
   try {
+    console.time("DB Lookup");
     const user = await User.findOne({ email });
+    console.timeEnd("DB Lookup");
 
     if (!user) {
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
 
-    // Check if the user is blocked
     if (user.isBlocked) {
       return res.status(403).json({ message: 'Your account has been blocked. Please contact support.' });
     }
 
+    console.time("Password Compare");
     const isMatch = await user.matchPassword(password);
+    console.timeEnd("Password Compare");
+
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
+
+    console.time("Token Generate");
+    const token = generateToken(user._id, user.role);
+    console.timeEnd("Token Generate");
+
+    console.timeEnd("LoginTotal");
 
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
       role: user.role,
-      token: generateToken(user._id, user.role)
+      token
     });
 
   } catch (err) {
