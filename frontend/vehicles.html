@@ -4,40 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Vehicle Management</title>
-
-  <!-- Styles -->
   <link rel="stylesheet" href="css/vehicles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet" />
-
-  <!-- Scripts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
   <!-- Navbar -->
-  <header class="netic-navbar">
-    <div class="container">
-      <div class="logo">AJM Car Rental</div>
-      <ul class="nav-links">
-        <li><a href="userdashboard.html">Dashboard</a></li>
-        <li><a href="booking-history.html">Bookings</a></li>
-        <li><a href="profile.html">Profile</a></li>
-        <li><a href="login.html">Logout</a></li>
-      </ul>
-      <div class="icons">
-        <i class="fas fa-car"></i>
-      </div>
-    </div>
+  <header class="navbar">
+    <div class="navbar-brand">AJM Cars</div>
+    <button id="menuToggle" class="menu-toggle" aria-label="Toggle Menu">
+      <i class="fas fa-bars"></i>
+    </button>
   </header>
 
-  <!-- Main Section -->
-  <main class="vehicle-main">
-    <!-- Controls -->
+  <!-- Sidebar Navigation -->
+  <nav id="sidebar" class="sidebar">
+    <button id="closeSidebar" class="close-btn" aria-label="Close Sidebar">&times;</button>
+    <ul>
+      <li><a href="userdashboard.html">Dashboard</a></li>
+      <li><a href="vehicles.html" class="active">Vehicles</a></li>
+      <li><a href="bookings.html">Bookings</a></li>
+      <li><a href="profile.html">My Profile</a></li>
+      <li><a href="logout.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <!-- Fetch & Filter Controls -->
     <section class="controls">
       <button id="loadAllBtn">Get All Vehicles</button>
-
       <div class="filter-controls">
         <select id="filterType">
           <option value="">All Types</option>
@@ -45,20 +42,17 @@
           <option value="Sedan">Sedan</option>
           <option value="Hatchback">Hatchback</option>
         </select>
-
         <select id="filterFuel">
           <option value="">All Fuel Types</option>
           <option value="petrol">Petrol</option>
           <option value="diesel">Diesel</option>
           <option value="electric">Electric</option>
         </select>
-
         <select id="filterAvailability">
           <option value="">All Availability</option>
           <option value="true">Available</option>
           <option value="false">Booked</option>
         </select>
-
         <button id="applyFilters">Apply Filters</button>
         <button id="clearFilters">Clear Filters</button>
       </div>
@@ -69,5 +63,29 @@
   </main>
 
   <script src="js/vehicles.js"></script>
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const closeSidebar = document.getElementById('closeSidebar');
+
+    menuToggle?.addEventListener('click', () => {
+      sidebar?.classList.add('open');
+    });
+
+    closeSidebar?.addEventListener('click', () => {
+      sidebar?.classList.remove('open');
+    });
+
+    window.addEventListener('click', (e) => {
+      if (
+        sidebar?.classList.contains('open') &&
+        !sidebar.contains(e.target) &&
+        e.target !== menuToggle &&
+        !menuToggle.contains(e.target)
+      ) {
+        sidebar.classList.remove('open');
+      }
+    });
+  </script>
 </body>
 </html>
