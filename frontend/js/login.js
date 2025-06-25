@@ -46,15 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('userName', data.name);
       localStorage.setItem('userRole', data.role);
 
-      Toastify({
-        text: "Login successful!",
-        duration: 2000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#4caf50",
-        stopOnFocus: true,
-      }).showToast();
-
+      // Redirect after short delay
       setTimeout(() => {
         if (data.role === 'admin') {
           window.location.href = 'admindashboard.html';
