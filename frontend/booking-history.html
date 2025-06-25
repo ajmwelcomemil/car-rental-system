@@ -17,26 +17,31 @@
 <body>
 
   <!-- Navbar -->
-  <header class="netic-navbar">
+  <nav class="netic-navbar">
     <div class="container">
       <div class="logo">AJM Car Rental</div>
-      <ul class="nav-links">
+      <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+    </div>
+
+    <!-- Slide-in Nav -->
+    <div class="mobile-nav" id="mobileNav">
+      <div class="close-btn" id="closeNav"><i class="fas fa-times"></i></div>
+      <ul>
         <li><a href="userdashboard.html">Dashboard</a></li>
         <li><a href="vehicles.html">Vehicles</a></li>
-        <li><a href="profile.html">Profile</a></li>
-        <li><a href="login.html">Logout</a></li>
+        <li><a href="booking-history.html" class="active">Bookings</a></li>
+        <li><a href="profile.html">My Profile</a></li>
+        <li><a href="logout.html">Logout</a></li>
       </ul>
-      <div class="icons">
-        <i class="fas fa-clock"></i>
-      </div>
     </div>
-  </header>
+
+    <div class="overlay" id="overlay"></div>
+  </nav>
 
   <!-- Main Content -->
   <div class="container booking-section">
     <h1>Your Booking History</h1>
 
-    <!-- Status filter -->
     <div class="filter">
       <label for="statusFilter">Filter by Status:</label>
       <select id="statusFilter">
@@ -49,10 +54,8 @@
       </select>
     </div>
 
-    <!-- Loader -->
     <div id="loader" class="loader">Please wait...</div>
 
-    <!-- Booking List -->
     <div id="booking-list"></div>
   </div>
 

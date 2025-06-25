@@ -1,5 +1,5 @@
 function openModal(id) {
-  document.getElementById(id).style.display = 'block';
+  document.getElementById(id).style.display = 'flex';
 }
 
 function closeModal(id) {
@@ -20,19 +20,39 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('phone').textContent = data.phone;
   document.getElementById('role').textContent = data.role;
   document.getElementById('createdAt').textContent = `Member Since: ${new Date(data.createdAt).toDateString()}`;
-
   document.getElementById('profilePic').src = data.profilePic
     ? `https://ajmcars-vohf.onrender.com${data.profilePic}`
     : 'https://via.placeholder.com/150?text=No+Image';
 
-  // Pre-fill edit form
+  // Pre-fill form
   const form = document.getElementById('editProfileForm');
   form.name.value = data.name;
   form.email.value = data.email;
   form.phone.value = data.phone;
+
+  // Mobile navbar toggle logic
+  const toggleBtn = document.getElementById('mobile-menu');
+  const mobileNav = document.getElementById('mobileNav');
+  const overlay = document.getElementById('overlay');
+  const closeNav = document.getElementById('closeNav');
+
+  toggleBtn.addEventListener('click', () => {
+    mobileNav.classList.add('active');
+    overlay.classList.add('active');
+  });
+
+  closeNav.addEventListener('click', () => {
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  overlay.addEventListener('click', () => {
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+  });
 });
 
-// Edit profile submission
+// Edit profile
 document.getElementById('editProfileForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const token = localStorage.getItem('authToken');
@@ -65,7 +85,7 @@ document.getElementById('editProfileForm').addEventListener('submit', async (e) 
   }
 });
 
-// Reset password submission
+// Reset password
 document.getElementById('resetPasswordForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const token = localStorage.getItem('authToken');
@@ -99,7 +119,7 @@ document.getElementById('resetPasswordForm').addEventListener('submit', async (e
   }
 });
 
-// SweetAlert2 Notifications
+// SweetAlert2 error
 function showErrorAlert(message) {
   Swal.fire({
     icon: 'error',

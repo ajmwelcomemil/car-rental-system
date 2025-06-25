@@ -8,72 +8,75 @@
   <!-- Styles -->
   <link rel="stylesheet" href="css/profile.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet" />
-
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
-  <!-- Navbar (same as userdashboard) -->
-  <header class="netic-navbar">
-    <div class="container">
-      <div class="logo">AJM Car Rental</div>
-      <ul class="nav-links">
-        <li><a href="userdashboard.html" class="active">Dashboard</a></li>
-        <li><a href="vehicles.html">Vehicles</a></li>
-        <li><a href="booking-history.html">Bookings</a></li>
-        <li><a href="login.html">Logout</a></li>
-      </ul>
-      <div class="icons">
-        <i class="fas fa-user-circle"></i>
-      </div>
-    </div>
-  </header>
-
-  <!-- Profile Section -->
-  <div class="profile-container">
-    <div class="profile-card">
-      <img id="profilePic" class="profile-pic" src="" alt="Profile Picture" />
-      <div class="profile-info">
-        <h2 id="name">Name</h2>
-        <p><strong>Email:</strong> <span id="email"></span></p>
-        <p><strong>Phone:</strong> <span id="phone"></span></p>
-        <p><strong>Role:</strong> <span id="role"></span></p>
-        <p id="createdAt"></p>
-        <button class="edit-btn" onclick="openModal('editProfileModal')">Edit Profile</button>
-        <button class="reset-btn" onclick="openModal('resetPasswordModal')">Reset Password</button>
-      </div>
-    </div>
+<!-- Navbar -->
+<nav class="netic-navbar">
+  <div class="container">
+    <div class="logo">AJM Cars</div>
+    <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
   </div>
 
-  <!-- Edit Profile Modal -->
-  <div class="modal" id="editProfileModal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('editProfileModal')">&times;</span>
-      <h3>Edit Profile</h3>
-      <form id="editProfileForm" enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="Name" required />
-        <input type="email" name="email" placeholder="Email" required />
-        <input type="text" name="phone" placeholder="Phone" required />
-        <input type="file" name="profilePic" />
-        <button type="submit">Update</button>
-      </form>
+  <!-- Slide-in Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="close-btn" id="closeNav"><i class="fas fa-times"></i></div>
+    <ul>
+      <li><a href="userdashboard.html">Dashboard</a></li>
+      <li><a href="vehicles.html">Vehicles</a></li>
+      <li><a href="booking-history.html">Bookings</a></li>
+      <li><a href="profile.html" class="active">My Profile</a></li>
+      <li><a href="logout.html">Logout</a></li>
+    </ul>
+  </div>
+  <div class="overlay" id="overlay"></div>
+</nav>
+
+<!-- Profile Section -->
+<div class="profile-container">
+  <div class="profile-card">
+    <img id="profilePic" class="profile-pic" src="" alt="Profile Picture" />
+    <div class="profile-info">
+      <h2 id="name">Name</h2>
+      <p><strong>Email:</strong> <span id="email"></span></p>
+      <p><strong>Phone:</strong> <span id="phone"></span></p>
+      <p><strong>Role:</strong> <span id="role"></span></p>
+      <p id="createdAt"></p>
+      <button class="edit-btn" onclick="openModal('editProfileModal')">Edit Profile</button>
+      <button class="reset-btn" onclick="openModal('resetPasswordModal')">Reset Password</button>
     </div>
   </div>
+</div>
 
-  <!-- Reset Password Modal -->
-  <div class="modal" id="resetPasswordModal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('resetPasswordModal')">&times;</span>
-      <h3>Reset Password</h3>
-      <form id="resetPasswordForm">
-        <input type="password" name="password" placeholder="New Password" required />
-        <button type="submit">Update Password</button>
-      </form>
-    </div>
+<!-- Edit Profile Modal -->
+<div class="modal" id="editProfileModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('editProfileModal')">&times;</span>
+    <h3>Edit Profile</h3>
+    <form id="editProfileForm" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="text" name="phone" placeholder="Phone" required />
+      <input type="file" name="profilePic" />
+      <button type="submit">Update</button>
+    </form>
   </div>
+</div>
 
-  <script src="js/profile.js"></script>
+<!-- Reset Password Modal -->
+<div class="modal" id="resetPasswordModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('resetPasswordModal')">&times;</span>
+    <h3>Reset Password</h3>
+    <form id="resetPasswordForm">
+      <input type="password" name="password" placeholder="New Password" required />
+      <button type="submit">Update Password</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/profile.js"></script>
 </body>
 </html>

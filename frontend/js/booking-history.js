@@ -261,3 +261,27 @@ function showErrorToast(message) {
     confirmButtonColor: '#ff6b6b'
   });
 }
+// Navbar toggle logic
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('mobile-menu');
+  const mobileNav = document.getElementById('mobileNav');
+  const overlay = document.getElementById('overlay');
+  const closeNav = document.getElementById('closeNav');
+
+  if (toggleBtn && mobileNav && overlay && closeNav) {
+    toggleBtn.addEventListener('click', () => {
+      mobileNav.classList.add('active');
+      overlay.classList.add('active');
+    });
+
+    closeNav.addEventListener('click', () => {
+      mobileNav.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      mobileNav.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+  }
+});
