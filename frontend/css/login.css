@@ -120,7 +120,7 @@ footer p {
   border: 6px solid rgba(255, 255, 255, 0.2);
   border-top-color: #e50914;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.5s linear infinite;
 }
 
 @keyframes spin {
