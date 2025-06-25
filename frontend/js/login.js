@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('login-form');
   const preloader = document.getElementById('preloader');
+  const emailEl = document.getElementById('email');
+  const passwordEl = document.getElementById('password');
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
-    console.log('Form submit handler fired');
 
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
+    const email = emailEl.value.trim();
+    const password = passwordEl.value;
 
     if (!email || !password) {
       Swal.fire({
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Show preloader
+    // ⚡ Show preloader instantly
     preloader.style.display = 'flex';
     preloader.style.opacity = '1';
 
@@ -30,46 +31,39 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({ email, password }),
       });
 
-      console.log('Response status:', response.status);
+      const data = await response.json();
 
       if (!response.ok) {
-        const err = await response.json().catch(() => null);
-        throw new Error(err?.message || `Server responded ${response.status}`);
+        throw new Error(data?.message || 'Login failed.');
       }
-
-      const data = await response.json();
-      console.log('Response JSON:', data);
 
       localStorage.setItem('authToken', data.token);
       localStorage.setItem('userName', data.name);
       localStorage.setItem('userRole', data.role);
 
+      // ✅ Instant redirect without waiting 2s
       Swal.fire({
         icon: 'success',
         title: 'Login Successful',
-        text: `Welcome back, ${data.name}!`,
-        showConfirmButton: false,
-        timer: 1500
+        text: `Welcome, ${data.name}!`,
+        timer: 1000,
+        showConfirmButton: false
       });
 
+      // ⏱ Replace setTimeout with Swal’s timer
       setTimeout(() => {
-        if (data.role === 'admin') {
-          window.location.href = 'admindashboard.html';
-        } else {
-          window.location.href = 'userdashboard.html';
-        }
-      }, 2000);
+        window.location.href = data.role === 'admin' ? 'admindashboard.html' : 'userdashboard.html';
+      }, 1000);
 
     } catch (error) {
-      console.error('Fetch/login error:', error);
       Swal.fire({
         icon: 'error',
         title: 'Login Failed',
-        text: `Error: ${error.message}`,
+        text: error.message,
         confirmButtonColor: '#ff6b6b',
       });
-
-      // Hide preloader on error
+    } finally {
+      // ✅ Always hide preloader
       preloader.style.opacity = '0';
       setTimeout(() => {
         preloader.style.display = 'none';
@@ -77,10 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Hide preloader after full page load
+  // ⛔ Optional: remove if not needed
   window.addEventListener("load", () => {
     preloader.style.opacity = "0";
-    preloader.style.pointerEvents = "none";
-    setTimeout(() => preloader.style.display = "none", 500);
+    setTimeout(() => preloader.style.display = "none", 300);
   });
 });
