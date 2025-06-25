@@ -5,16 +5,35 @@ const loadAllBtn = document.getElementById('loadAllBtn');
 // 1. Load & render all vehicles
 async function loadVehicles() {
   const token = localStorage.getItem('authToken');
+
+  if (!token) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Not Logged In',
+      text: 'Please log in to view vehicles.',
+      confirmButtonColor: '#ff6b6b'
+    });
+    grid.innerHTML = `<p class="error">You must be logged in to view vehicles.</p>`;
+    return;
+  }
+
   try {
+    console.log('Fetching vehicles with token:', token);
+
     const res = await fetch(APIF, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
-    if (!res.ok) throw new Error('Failed to load vehicles');
+
+    if (!res.ok) {
+      const errMsg = await res.text();
+      throw new Error(`Server Error (${res.status}): ${errMsg}`);
+    }
+
     const list = await res.json();
     renderVehicles(list);
-    // No popup on success (as per original code)
+
   } catch (error) {
-    console.error(error);
+    console.error('Error while loading vehicles:', error);
     grid.innerHTML = `<p class="error">Unable to load vehicles. Please try again later.</p>`;
     Swal.fire({
       icon: 'error',
@@ -70,8 +89,26 @@ document.getElementById('applyFilters').addEventListener('click', () => {
   const fuel = document.getElementById('filterFuel').value.trim();
   const avail = document.getElementById('filterAvailability').value.trim();
 
-  fetch(APIF)
-    .then(res => res.json())
+  const token = localStorage.getItem('authToken');
+  if (!token) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Not Logged In',
+      text: 'Please log in to apply filters.',
+      confirmButtonColor: '#ff6b6b'
+    });
+    return;
+  }
+
+  fetch(APIF, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`Server Error (${res.status})`);
+      }
+      return res.json();
+    })
     .then(vehicles => {
       const filteredVehicles = vehicles.filter(v => {
         const okType = !type || v.type.trim().toLowerCase() === type.toLowerCase();
@@ -91,7 +128,7 @@ document.getElementById('applyFilters').addEventListener('click', () => {
       });
     })
     .catch(error => {
-      console.error(error);
+      console.error('Error applying filters:', error);
       grid.innerHTML = `<p class="error">Unable to apply filters. Please try again later.</p>`;
       Swal.fire({
         icon: 'error',
@@ -117,6 +154,6 @@ document.getElementById('clearFilters').addEventListener('click', () => {
   });
 });
 
-// Initial load
+// 6. Initial load
 loadAllBtn.addEventListener('click', loadVehicles);
 loadAllBtn.click();

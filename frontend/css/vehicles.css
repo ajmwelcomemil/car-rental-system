@@ -1,7 +1,7 @@
 :root {
   --color-primary: #e50914; /* Netflix Red */
   --color-accent: #f40612;  /* Brighter Netflix Red */
-  --color-bg: #141414;      /* Netflix Dark Background */
+  background: linear-gradient(to right, #2b005b, #3a006f);
   --color-card: #1f1f1f;    /* Card/Dark Gray */
   --radius: 10px;
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
@@ -182,7 +182,7 @@ body {
 .controls select {
   flex: 1;
   min-width: 200px;
-  background: #2c2c2c;
+  background: linear-gradient(to right, #2b005b, #3a006f);
   color: white;
 }
 
