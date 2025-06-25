@@ -1,45 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Vehicle Details</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/vehicle-details.css">
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/vehicle-detail.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet" />
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
-  <div class="container">
-    <!-- Vehicle Info Section -->
-    <div class="vehicle-header" id="vehicleDetails"></div>
+  <!-- Navbar -->
+  <header class="netic-navbar">
+    <div class="container">
+      <div class="logo">AJM Car Rental</div>
+      <ul class="nav-links">
+        <li><a href="userdashboard.html">Dashboard</a></li>
+        <li><a href="booking-history.html">Bookings</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="login.html">Logout</a></li>
+      </ul>
+      <div class="icons">
+        <i class="fas fa-car-side"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Vehicle Detail Section -->
+  <main class="detail-container">
+    <section id="vehicleDetails" class="vehicle-card">
+      <p style="text-align:center; color:#fff;">Loading vehicle details...</p>
+    </section>
 
     <!-- Booking Section -->
-    <div id="bookingSection" style="display: none;">
-      <h3>Book This Vehicle</h3>
-      
-      <label for="pickupDate">Pickup Date:
-        <input type="date" id="pickupDate" required>
-      </label>
-      
-      <label for="dropoffDate">Dropoff Date: 
-        <input type="date" id="dropoffDate" required>
-      </label>
+    <section id="bookingSection" class="booking-box" style="display: none;">
+      <h2>Book This Vehicle</h2>
+      <div class="date-inputs">
+        <label>Pickup Date:
+          <input type="date" id="pickupDate" />
+        </label>
+        <label>Drop-off Date:
+          <input type="date" id="dropoffDate" />
+        </label>
+      </div>
 
       <div class="summary">
-        <p><strong>Total Days:</strong> <span id="totalDays">0</span></p>
-        <p><strong>Total Price:</strong> ₹<span id="totalPrice">0</span></p>
+        <p>Total Days: <span id="totalDays">0</span></p>
+        <p>Total Price: ₹<span id="totalPrice">0</span></p>
       </div>
 
       <button id="confirmBtn">Confirm Booking</button>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <!-- JavaScript -->
-  <script src="js/vehicle-details.js"></script>
+  <script src="js/vehicle-detail.js"></script>
 </body>
 </html>

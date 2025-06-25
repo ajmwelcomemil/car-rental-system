@@ -3,28 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Car Rental System</title>
+  <title>AJM Cars</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- AOS (Optional Animation Library) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="css/userdashboard.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- Header Section -->
-  <header>
-    <nav>
-      <div class="logo">
-        <a href="#"> AJM Car Rental</a>
-      </div>
+  <!-- Navbar -->
+  <header class="netic-navbar">
+    <div class="container">
+      <div class="logo">AJM Cars</div>
 
+      <!-- Toggle Button for Mobile -->
       <button class="menu-toggle" aria-label="Toggle menu">☰</button>
 
       <ul class="nav-links">
-        <li><a href="vehicles.html">View Vehicles</a></li>
+        <li><a href="vehicles.html" class="active">View Vehicles</a></li>
         <li><a href="booking-history.html">My Bookings</a></li>
         <li><a href="profile.html">My Profile</a></li>
         <li><a href="login.html">Logout</a></li>
       </ul>
-    </nav>
   </header>
 
   <!-- Hero Section -->
@@ -36,10 +44,34 @@
     </div>
   </section>
 
+  <!-- Features Section -->
+  <section class="features">
+    <div class="features-container">
+      <div class="feature-box" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Affordable" />
+        <h3>Affordable Rates</h3>
+        <p>We offer competitive pricing without compromising on service or safety.</p>
+      </div>
+      <div class="feature-box" data-aos="fade-up" data-aos-delay="200">
+        <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Support" />
+        <h3>24/7 Support</h3>
+        <p>Our team is always here to help you during your journey.</p>
+      </div>
+      <div class="feature-box" data-aos="fade-up" data-aos-delay="300">
+        <img src="https://cdn-icons-png.flaticon.com/512/164/164318.png" alt="Range" />
+        <h3>Wide Vehicle Range</h3>
+        <p>From budget hatchbacks to luxury sedans, we've got what you need.</p>
+      </div>
+    </div>
+  </section>
+ <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+
+  <!-- Navbar Toggle Script -->
   <script>
     const toggleBtn = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-
     toggleBtn.addEventListener('click', () => {
       navLinks.classList.toggle('active');
     });

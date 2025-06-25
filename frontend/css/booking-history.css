@@ -1,151 +1,173 @@
-body {
-  font-family: Arial, sans-serif;
+/* RESET */
+* {
   margin: 0;
   padding: 0;
-  background: #141414;
-  color: #f1f1f1;
+  box-sizing: border-box;
 }
 
-.container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #1f1f1f;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+body {
+  font-family: 'Jost', sans-serif;
+  background: linear-gradient(to right, #100c58, #2b0a76);
+  color: #fff;
+}
+
+/* NAVBAR */
+.netic-navbar {
+  background: linear-gradient(to right, #100c58, #2b0a76);
+  padding: 20px 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.netic-navbar .container {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  background-color: #ef233c;
+  color: white;
+}
+
+.icons {
+  display: flex;
+  gap: 20px;
+}
+
+.icons i {
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* MAIN CONTENT */
+.booking-section {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: auto;
+  color: white;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #fff;
+  margin-bottom: 30px;
 }
 
+/* FILTER */
 .filter {
-  text-align: center;
   margin-bottom: 20px;
+  text-align: center;
 }
 
+.filter select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+}
+
+/* LOADER */
 .loader {
   text-align: center;
+  margin: 20px 0;
   font-weight: bold;
-  display: none;
-  color: #fff;
 }
 
-.booking-item {
-  border: 1px solid #333;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  background-color: #2a2a2a;
-  color: #f1f1f1;
+/* BOOKING LIST */
+#booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.booking-item button {
-  display: inline-block;
-  margin: 10px 8px 0 0;
-  padding: 8px 12px;
-  border: none;
-  background-color: #e50914;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.booking-item .cancel-btn {
-  background-color: #b71c1c;
-}
-
-.booking-item .review-btn {
-  background-color: #17a34a;
-}
-
-.booking-item .download-btn {
-  background-color: #ffb400;
-  color: #000;
-}
-
-.booking-item button:hover {
-  opacity: 0.85;
-}
-
-/* Modal Styles */
+/* REVIEW MODAL */
 .modal {
   display: none;
   position: fixed;
-  z-index: 100;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content {
-  background-color: #1f1f1f;
-  color: #fff;
-  margin: 10% auto;
-  padding: 20px;
-  width: 90%;
-  max-width: 500px;
+  background: white;
+  color: #000;
+  padding: 30px;
   border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
   position: relative;
+}
+
+.modal-content .stars {
+  margin: 15px 0;
+}
+
+.star {
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.star:hover,
+.star.selected {
+  color: #ef233c;
+}
+
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-content button {
+  background-color: #ef233c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .close {
   position: absolute;
-  right: 15px;
   top: 10px;
-  font-size: 28px;
+  right: 16px;
+  font-size: 22px;
   cursor: pointer;
-  color: #fff;
-}
-
-.stars {
-  text-align: center;
-  margin: 10px 0;
-}
-
-.star {
-  font-size: 30px;
-  color: #666;
-  cursor: pointer;
-}
-
-.star.selected {
-  color: gold;
-}
-
-#review-comment {
-  width: 100%;
-  height: 100px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #444;
-  background: #2a2a2a;
-  color: #fff;
-}
-
-#submit-review {
-  background-color: #17a34a;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  width: 100%;
-}
-
-.home-icon {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 24px;
-  color: #e50914;
-  text-decoration: none;
 }

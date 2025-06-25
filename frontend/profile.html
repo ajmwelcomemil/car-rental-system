@@ -4,21 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>User Profile</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/profile.css" />
-    <!-- Add Font Awesome for Home icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<body>
-  <!-- Home icon link -->
-  <a href="userdashboard.html" class="home-icon">
-    <i class="fas fa-home"></i>
-  </a>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+
+  <!-- Navbar (same as userdashboard) -->
+  <header class="netic-navbar">
+    <div class="container">
+      <div class="logo">AJM Car Rental</div>
+      <ul class="nav-links">
+        <li><a href="userdashboard.html" class="active">Dashboard</a></li>
+        <li><a href="vehicles.html">Vehicles</a></li>
+        <li><a href="booking-history.html">Bookings</a></li>
+        <li><a href="login.html">Logout</a></li>
+      </ul>
+      <div class="icons">
+        <i class="fas fa-user-circle"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Profile Section -->
   <div class="profile-container">
     <div class="profile-card">
-      <img id="profilePic" class="profile-pic" src="" alt="Profile Picture"/>
+      <img id="profilePic" class="profile-pic" src="" alt="Profile Picture" />
       <div class="profile-info">
         <h2 id="name">Name</h2>
         <p><strong>Email:</strong> <span id="email"></span></p>

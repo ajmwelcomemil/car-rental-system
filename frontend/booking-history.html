@@ -4,18 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Booking History</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/booking-history.css" />
-    <!-- Add Font Awesome for Home icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- Home icon link -->
-  <a href="userdashboard.html" class="home-icon">
-    <i class="fas fa-home"></i>
-  </a>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet" />
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-  <div class="container">
+
+  <!-- Navbar -->
+  <header class="netic-navbar">
+    <div class="container">
+      <div class="logo">AJM Car Rental</div>
+      <ul class="nav-links">
+        <li><a href="userdashboard.html">Dashboard</a></li>
+        <li><a href="vehicles.html">Vehicles</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="login.html">Logout</a></li>
+      </ul>
+      <div class="icons">
+        <i class="fas fa-clock"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container booking-section">
     <h1>Your Booking History</h1>
 
     <!-- Status filter -->

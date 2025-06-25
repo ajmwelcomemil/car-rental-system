@@ -1,3 +1,18 @@
-document.getElementById('mobile-menu').addEventListener('click', () => {
-  document.getElementById('nav-links').classList.toggle('open');
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("mobile-menu");
+  const nav = document.getElementById("nav-links");
+
+  toggle.addEventListener("click", () => {
+    nav.classList.toggle("active");
+  });
+
+  // Slideshow
+  const slides = document.querySelectorAll(".slide");
+  let current = 0;
+
+  setInterval(() => {
+    slides[current].classList.remove("active");
+    current = (current + 1) % slides.length;
+    slides[current].classList.add("active");
+  }, 4000);
 });
