@@ -12,27 +12,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmPassword = document.getElementById('confirm-password').value;
 
     if (password !== confirmPassword) {
-      Toastify({
-        text: "Passwords do not match!",
-        duration: 3000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#ff6b6b",
-        stopOnFocus: true,
-      }).showToast();
+      Swal.fire({
+        icon: 'error',
+        title: 'Password Mismatch',
+        text: 'Passwords do not match!',
+        timer: 3000,
+        showConfirmButton: false,
+        position: 'top'
+      });
       return;
     }
 
     const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     if (!passwordRegex.test(password)) {
-      Toastify({
-        text: "Password must be at least 8 characters, including one number and one special character.",
-        duration: 4000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#ff6b6b",
-        stopOnFocus: true,
-      }).showToast();
+      Swal.fire({
+        icon: 'warning',
+        title: 'Weak Password',
+        text: 'Password must be at least 8 characters, include one number and one special character.',
+        timer: 4000,
+        showConfirmButton: false,
+        position: 'top'
+      });
       return;
     }
 
@@ -56,28 +56,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
 
         if (data._id) {
-          Toastify({
-            text: `Welcome, ${data.name}! Please log in.`,
-            duration: 3000,
-            gravity: "top",
-            position: "center",
-            backgroundColor: "#4caf50",
-            stopOnFocus: true,
-          }).showToast();
+          Swal.fire({
+            icon: 'success',
+            title: `Welcome, ${data.name}!`,
+            text: 'Registration successful. Please log in.',
+            timer: 3000,
+            showConfirmButton: false,
+            position: 'top'
+          });
 
           setTimeout(() => {
             window.location.href = 'login.html';
           }, 3000);
         } else {
           const errMsg = data.message || data.error || 'Registration failed';
-          Toastify({
+          Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed',
             text: errMsg,
-            duration: 4000,
-            gravity: "top",
-            position: "center",
-            backgroundColor: "#ff6b6b",
-            stopOnFocus: true,
-          }).showToast();
+            timer: 4000,
+            showConfirmButton: false,
+            position: 'top'
+          });
         }
       })
       .catch(error => {
@@ -88,14 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
           preloader.style.display = 'none';
         }, 300);
 
-        Toastify({
-          text: "Something went wrong. Check console.",
-          duration: 4000,
-          gravity: "top",
-          position: "center",
-          backgroundColor: "#ff6b6b",
-          stopOnFocus: true,
-        }).showToast();
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops!',
+          text: 'Something went wrong. Check console.',
+          timer: 4000,
+          showConfirmButton: false,
+          position: 'top'
+        });
       });
   });
 
