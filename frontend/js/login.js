@@ -10,14 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = document.getElementById('password').value;
 
     if (!email || !password) {
-      Toastify({
-        text: "Please fill out both fields.",
-        duration: 3000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#ff6b6b",
-        stopOnFocus: true,
-      }).showToast();
+      Swal.fire({
+        icon: 'warning',
+        title: 'Missing Fields',
+        text: 'Please fill out both email and password.',
+        confirmButtonColor: '#ff6b6b',
+      });
       return;
     }
 
@@ -46,7 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('userName', data.name);
       localStorage.setItem('userRole', data.role);
 
-      // Redirect after short delay
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful',
+        text: `Welcome back, ${data.name}!`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
       setTimeout(() => {
         if (data.role === 'admin') {
           window.location.href = 'admindashboard.html';
@@ -57,14 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } catch (error) {
       console.error('Fetch/login error:', error);
-      Toastify({
-        text: `Login error: ${error.message}`,
-        duration: 4000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#ff6b6b",
-        stopOnFocus: true,
-      }).showToast();
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        text: `Error: ${error.message}`,
+        confirmButtonColor: '#ff6b6b',
+      });
 
       // Hide preloader on error
       preloader.style.opacity = '0';
