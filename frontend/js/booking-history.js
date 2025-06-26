@@ -2,6 +2,7 @@ window.addEventListener('DOMContentLoaded', function () {
   const authToken = localStorage.getItem('authToken');
   if (!authToken) {
     window.location.href = 'login.html';
+    return;
   }
 
   const bookingList = document.getElementById('booking-list');
@@ -29,16 +30,30 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function fetchBookingHistory(status = 'All') {
     showLoader();
+
     fetch('https://ajmcars-vohf.onrender.com/api/bookings/my', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${authToken}`,
       },
     })
-      .then(response => response.json())
-      .then(bookings => {
+      .then(response => {
+        if (!response.ok) {
+          if (response.status === 401) {
+            showErrorToast('Session expired. Please login again.');
+            localStorage.removeItem('authToken');
+            setTimeout(() => window.location.href = 'login.html', 2000);
+          } else {
+            showErrorToast(`Failed to fetch bookings: ${response.statusText}`);
+          }
+          throw new Error('Fetch failed');
+        }
+        return response.json();
+      })
+      .then(data => {
         hideLoader();
-        if (bookings && bookings.length > 0) {
+        const bookings = Array.isArray(data) ? data : data.bookings || [];
+        if (bookings.length > 0) {
           displayBookings(bookings, status);
         } else {
           bookingList.innerHTML = '<p>No bookings found.</p>';
@@ -47,7 +62,7 @@ window.addEventListener('DOMContentLoaded', function () {
       .catch(error => {
         hideLoader();
         console.error('Error:', error);
-        showErrorToast('An error occurred while fetching bookings.');
+        // Error toast already shown above
       });
   }
 
@@ -261,7 +276,8 @@ function showErrorToast(message) {
     confirmButtonColor: '#ff6b6b'
   });
 }
-// Navbar toggle logic
+
+// ✅ Navbar toggle logic
 document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('mobile-menu');
   const mobileNav = document.getElementById('mobileNav');
