@@ -35,9 +35,12 @@ function renderUsers(users) {
         <button class="delete" data-id="${u._id}">Delete</button>
       </div>
     `;
-    (isBlocked ? card.querySelector('.unblock') : card.querySelector('.block')).onclick = isBlocked ? unblockUser : blockUser;
+
+    const toggleBtn = isBlocked ? card.querySelector('.unblock') : card.querySelector('.block');
+    toggleBtn.onclick = isBlocked ? unblockUser : blockUser;
     card.querySelector('.edit').onclick = () => openEditModal(u);
     card.querySelector('.delete').onclick = deleteUser;
+
     grid.appendChild(card);
   });
 }
@@ -72,32 +75,56 @@ async function searchUsers() {
 }
 
 async function blockUser(e) {
-  const id = e.target.dataset.id;
+  const btn = e.target;
+  const id = btn.dataset.id;
+  btn.disabled = true;
+  btn.textContent = 'Blocking...';
+
   try {
     const res = await fetch(`${API}/${id}/block`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...getAuthHeaders() }
     });
     if (!res.ok) throw new Error((await res.json()).message);
+
+    const card = btn.closest('.card');
+    card.querySelector('.info p:nth-child(2)').innerHTML = `<strong>Status:</strong> Blocked`;
+    btn.className = 'unblock';
+    btn.textContent = 'Unblock';
+    btn.onclick = unblockUser;
     showSuccessToast('User blocked');
-    loadAll();
   } catch (err) {
     showErrorToast('Error: ' + err.message);
+    btn.textContent = 'Block';
+  } finally {
+    btn.disabled = false;
   }
 }
 
 async function unblockUser(e) {
-  const id = e.target.dataset.id;
+  const btn = e.target;
+  const id = btn.dataset.id;
+  btn.disabled = true;
+  btn.textContent = 'Unblocking...';
+
   try {
     const res = await fetch(`${API}/${id}/unblock`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...getAuthHeaders() }
     });
     if (!res.ok) throw new Error((await res.json()).message);
+
+    const card = btn.closest('.card');
+    card.querySelector('.info p:nth-child(2)').innerHTML = `<strong>Status:</strong> Active`;
+    btn.className = 'block';
+    btn.textContent = 'Block';
+    btn.onclick = blockUser;
     showSuccessToast('User unblocked');
-    loadAll();
   } catch (err) {
     showErrorToast('Error: ' + err.message);
+    btn.textContent = 'Unblock';
+  } finally {
+    btn.disabled = false;
   }
 }
 
@@ -122,8 +149,9 @@ async function deleteUser(e) {
       headers: getAuthHeaders()
     });
     if (!res.ok) throw new Error((await res.json()).message);
+
+    e.target.closest('.card').remove(); // Remove from DOM
     showSuccessToast('User deleted');
-    loadAll();
   } catch (err) {
     showErrorToast('Error: ' + err.message);
   }
@@ -165,7 +193,7 @@ document.getElementById('editForm').onsubmit = async function (e) {
     if (!res.ok) throw new Error((await res.json()).message);
     showSuccessToast('User updated successfully');
     document.getElementById('editModal').classList.add('hidden');
-    loadAll();
+    loadAll(); // Re-render full list or you can optimize to update one card
   } catch (err) {
     showErrorToast('Error: ' + err.message);
   }
