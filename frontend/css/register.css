@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #141414;
+  background-color: #f4f6fa;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -17,23 +17,24 @@ body {
 }
 
 .form-container {
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: #ffffff;
   width: 100%;
   max-width: 400px;
   padding: 40px 25px;
-  border-radius: 10px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
-  transition: transform 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-container:hover {
   transform: translateY(-4px);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
 }
 
 .form-container h2 {
   font-size: 26px;
   font-weight: bold;
-  color: #fff;
+  color: #1e1e2f;
   text-align: center;
   margin-bottom: 25px;
 }
@@ -46,33 +47,34 @@ body {
 
 .form-group label {
   font-size: 14px;
-  color: #e5e5e5;
+  color: #333;
   margin-bottom: 6px;
 }
 
 .form-group input {
   padding: 12px;
   font-size: 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #333;
-  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f7f9fc;
+  color: #222;
   transition: all 0.3s ease;
 }
 
 .form-group input:focus {
   outline: none;
-  background-color: #444;
-  box-shadow: 0 0 0 2px #e50914;
+  background-color: #fff;
+  border-color: #0077ff;
+  box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.2);
 }
 
 .btn {
-  background-color: #e50914;
+  background-color: #0077ff;
   color: white;
   padding: 14px;
   width: 100%;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
@@ -80,7 +82,7 @@ body {
 }
 
 .btn:hover {
-  background-color: #f6121d;
+  background-color: #005edb;
   transform: scale(1.02);
 }
 
@@ -100,7 +102,7 @@ footer p {
   top: 15px;
   left: 15px;
   font-size: 26px;
-  color: #e50914;
+  color: #0077ff;
   text-decoration: none;
   z-index: 10;
   transition: transform 0.2s ease;
@@ -117,7 +119,7 @@ footer p {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #000;
+  background: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,8 +130,8 @@ footer p {
 .spinner {
   width: 60px;
   height: 60px;
-  border: 6px solid rgba(255, 255, 255, 0.2);
-  border-top-color: #e50914;
+  border: 6px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #0077ff;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }

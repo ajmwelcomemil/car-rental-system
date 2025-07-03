@@ -79,11 +79,15 @@ body {
   transition: background 0.3s ease;
 }
 
-.mobile-nav li a:hover,
-.mobile-nav li a.active {
-  background-color: #ef233c;
+.mobile-nav li a:hover {
+  background-color: #0077ff;
 }
 
+.mobile-nav li a.active {
+  background-color: transparent;
+}
+
+/* CLOSE BUTTON */
 .close-btn {
   position: absolute;
   top: 20px;
@@ -93,6 +97,7 @@ body {
   cursor: pointer;
 }
 
+/* OVERLAY */
 .overlay {
   position: fixed;
   top: 0;
@@ -125,6 +130,11 @@ body {
   width: 100%;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-4px);
 }
 
 .profile-pic {
@@ -133,16 +143,18 @@ body {
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 20px;
-  border: 3px solid #ef233c;
+  border: 3px solid #0077ff;
 }
 
 .profile-info p {
   margin-bottom: 10px;
+  font-size: 15px;
 }
 
+/* BUTTONS */
 .edit-btn,
 .reset-btn {
-  background-color: #ef233c;
+  background-color: #0077ff;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -154,7 +166,7 @@ body {
 
 .edit-btn:hover,
 .reset-btn:hover {
-  background-color: #c9182a;
+  background-color: #005edb;
 }
 
 /* MODALS */
@@ -192,14 +204,20 @@ body {
 }
 
 .modal-content button {
-  background-color: #ef233c;
+  background-color: #0077ff;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
+.modal-content button:hover {
+  background-color: #005edb;
+}
+
+/* CLOSE BUTTON FOR MODAL */
 .close {
   position: absolute;
   top: 10px;

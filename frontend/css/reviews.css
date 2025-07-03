@@ -1,30 +1,41 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #141414;
+/* RESET */
+* {
   margin: 0;
   padding: 0;
-  color: #f1f1f1;
+  box-sizing: border-box;
 }
 
+/* BODY */
+body {
+  font-family: 'Jost', sans-serif;
+  background: linear-gradient(to right, #f5f6fa, #e6ecf5);
+  color: #333;
+  padding: 0;
+  margin: 0;
+}
+
+/* CONTAINER */
 .reviews-container {
   max-width: 900px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #1f1f1f;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
+/* TITLE */
 h2 {
   text-align: center;
-  color: #fff;
+  color: #100c58;
+  margin-bottom: 20px;
+  font-size: 28px;
 }
 
+/* REVIEW ITEM */
 .review-item {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid #333;
-  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
 }
 
 .review-item:last-child {
@@ -32,60 +43,68 @@ h2 {
 }
 
 .review-user {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.1em;
-  margin-bottom: 5px;
-  color: #fff;
+  color: #2b0a76;
 }
 
 .review-rating {
-  color: #ff9800;
-  font-weight: bold;
+  color: #ef233c;
+  font-weight: 600;
+  margin: 5px 0;
 }
 
 .review-comment {
   font-size: 1em;
-  color: #ccc;
+  color: #444;
+  margin-top: 6px;
 }
 
 .review-date {
   font-size: 0.9em;
-  color: #777;
-  margin-top: 5px;
+  color: #888;
+  margin-top: 6px;
 }
 
-/* Comment form styles */
+/* COMMENT FORM */
 .comment-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 30px;
 }
 
 .review-comment-box {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #444;
-  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   resize: vertical;
   font-size: 1em;
-  background-color: #2a2a2a;
-  color: #fff;
-  box-sizing: border-box;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: border 0.3s ease;
 }
 
+.review-comment-box:focus {
+  border-color: #ef233c;
+  outline: none;
+}
+
+/* SUBMIT BUTTON */
 .submit-button {
   align-self: flex-end;
-  background-color: #e50914;
+  background-color: #ef233c;
   color: white;
-  padding: 10px 16px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 6px;
   font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #b20710;
+  background-color: #c9182a;
 }

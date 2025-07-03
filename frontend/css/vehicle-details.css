@@ -6,20 +6,22 @@
 body {
   margin: 0;
   padding: 2rem;
-  background: #141414;
-  color: #e5e5e5;
+  background: linear-gradient(to right, #f5f7fa, #e6ecf5);
+  color: #333;
 }
 
+/* CONTAINER */
 .container {
   max-width: 900px;
   margin: auto;
-  background: #1f1f1f;
+  background: #ffffff;
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-  border: 1px solid #333;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
 }
 
+/* VEHICLE HEADER */
 .vehicle-header {
   display: flex;
   gap: 2rem;
@@ -30,8 +32,8 @@ body {
   width: 300px;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-  border: 1px solid #333;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ccc;
 }
 
 .vehicle-info {
@@ -41,58 +43,63 @@ body {
 .vehicle-info h2 {
   margin-top: 0;
   font-size: 2.2rem;
-  color: #ffffff;
+  color: #100c58;
 }
 
 .vehicle-info p {
-  margin: 0.4rem 0;
-  color: #cccccc;
+  margin: 0.5rem 0;
+  color: #444;
+  font-size: 1rem;
 }
 
+/* BOOKING SECTION */
 #bookingSection {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid #333;
+  border-top: 1px solid #ddd;
 }
 
 label {
   display: block;
   margin-bottom: 1rem;
   font-weight: 500;
-  color: #ffffff;
+  color: #2b0a76;
 }
 
 input[type="date"] {
   padding: 0.6rem;
   border-radius: 6px;
-  border: 1px solid #555;
-  background: #222;
-  color: #fff;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  color: #333;
   width: 100%;
   max-width: 300px;
 }
 
+/* PRICE & SUMMARY */
 .summary {
   margin: 1rem 0;
   font-size: 1.1rem;
-  color: #dddddd;
+  color: #444;
 }
 
+/* CONFIRM BUTTON */
 #confirmBtn {
-  background: #e50914;
+  background: #ef233c;
   color: white;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 #confirmBtn:hover {
-  background: #b0060f;
+  background: #c9182a;
 }
 
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .vehicle-header {
     flex-direction: column;
