@@ -1,14 +1,14 @@
 :root {
-  --color-primary: #0077ff;        /* Blue accent */
-  --color-accent: #ffffff;         /* White text */
-  --color-bg: #f7f9fc;             /* Light background */
-  --color-card: #ffffff;           /* Card background */
-  --color-border: #ddd;
+  --color-primary: #e50914;       /* Netflix red */
+  --color-accent: #ffffff;        /* White accent */
+  --color-bg: #141414;            /* Netflix dark background */
+  --color-card: #1f1f1f;          /* Dark card background */
+  --color-border: #333;
   --radius: 12px;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   --spacing: 1rem;
-  --text-light: #555;
-  --text-dark: #111;
+  --text-light: #ccc;
+  --text-dark: #fff;
 }
 
 * {
@@ -36,10 +36,6 @@ body {
   flex-wrap: wrap;
   gap: var(--spacing);
   margin-bottom: var(--spacing);
-  background: var(--color-card);
-  padding: var(--spacing);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
 }
 
 .controls input,
@@ -47,20 +43,20 @@ body {
   padding: 0.5rem 1rem;
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
-  background-color: #f2f4f7;
-  color: var(--text-dark);
+  background-color: #2a2a2a;
+  color: var(--text-light);
 }
 
 .controls button {
   background: var(--color-primary);
-  color: var(--color-accent);
+  color: var(--text-dark);
   border: none;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .controls button:hover {
-  background: #005dc1;
+  background: #b00610;
 }
 
 /* Grid */
@@ -106,15 +102,15 @@ body {
   padding: 0.5rem;
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
-  background-color: #f2f4f7;
-  color: var(--text-dark);
+  background-color: #2a2a2a;
+  color: var(--text-light);
   margin-top: 0.25rem;
 }
 
 /* Footer */
 .booking-card .card-footer {
   padding: var(--spacing);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid #333;
   text-align: right;
 }
 
@@ -129,14 +125,14 @@ body {
 }
 
 .booking-card .btn:hover {
-  background: #005dc1;
+  background: #b00610;
 }
 
 /* No data */
 .no-data {
   grid-column: 1/-1;
   text-align: center;
-  color: #999;
+  color: #888;
   font-size: 1.1rem;
 }
 
@@ -146,11 +142,11 @@ body {
   top: 10px;
   left: 10px;
   font-size: 24px;
-  color: var(--color-primary);
+  color: var(--color-accent);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .home-icon:hover {
-  color: #005dc1;
+  color: var(--color-primary);
 }

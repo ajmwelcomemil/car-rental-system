@@ -1,14 +1,302 @@
 :root {
-  --color-primary: #e50914;
-  --color-accent: #f40612;
-  --color-card: #1f1f1f;
+  --color-primary: #e50914; /* Netflix Red */
+  --color-accent: #f40612;  /* Brighter Netflix Red */
+  background: linear-gradient(to right, #2b005b, #3a006f);
+  --color-card: #1f1f1f;    /* Card/Dark Gray */
   --radius: 10px;
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   --spacing: 1rem;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(to right, #2b005b, #3a006f); /* moved here */
+  background: var(--color-bg);
   color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: var(--spacing) auto;
+  padding: 0 var(--spacing);
+}
+
+.form-section {
+  background: var(--color-card);
+  padding: var(--spacing);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: var(--spacing);
+  display: none;
+}
+
+.form-section h2 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing);
+}
+
+.field {
+  margin-bottom: var(--spacing);
+}
+
+.field label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.field input {
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: 1px solid #555;
+  background: #2c2c2c;
+  color: #f5f5f5;
+  margin-top: 0.25rem;
+}
+
+#vehicleForm button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  margin-right: var(--spacing);
+  cursor: pointer;
+  color: white;
+}
+
+#submitBtn {
+  background: var(--color-accent);
+}
+
+#cancelEdit {
+  background: #555;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--spacing);
+}
+
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: var(--spacing);
+  flex: 1;
+}
+
+.card-content h3 {
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
+
+.card-content p {
+  margin: 0.25rem 0;
+}
+
+.card-actions {
+  display: flex;
+  gap: var(--spacing);
+  padding: var(--spacing);
+}
+
+.card-actions button {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.3s;
+  color: rgb(0, 0, 0);
+}
+
+.card-actions .edit {
+  background: #f39c12;
+  color: #000;
+}
+
+.card-actions .delete {
+  background: #c0392b;
+}
+
+.card-actions .toggle {
+  background: var(--color-primary);
+}
+
+.card-actions button:hover {
+  opacity: 0.9;
+}
+
+/* Controls bar */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing);
+  margin-bottom: var(--spacing);
+  background: var(--color-card);
+  padding: var(--spacing);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.controls button,
+.controls input,
+.controls select {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid #444;
+}
+
+.controls button {
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.controls button:hover {
+  background: #ff0a16;
+}
+
+.controls input,
+.controls select {
+  flex: 1;
+  min-width: 200px;
+  background: linear-gradient(to right, #2b005b, #3a006f);
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .controls input,
+  .controls button,
+  .controls select {
+    width: 100%;
+  }
+}
+
+/* Home icon if you use it elsewhere */
+.home-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* ==== Navbar ==== */
+.navbar {
+  background: linear-gradient(to right, #2b005b, #3a006f);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1002;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* ==== Mobile Sidebar (Right Side) ==== */
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 260px;
+  height: 100%;
+  background-color: #2a007c;
+  color: white;
+  padding: 2rem 1rem;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebar .close-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 3rem;
+}
+
+.sidebar ul li {
+  margin: 1rem 0;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: block;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .sidebar {
+    display: none;
+  }
 }

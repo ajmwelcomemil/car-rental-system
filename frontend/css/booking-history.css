@@ -7,15 +7,15 @@
 
 body {
   font-family: 'Jost', sans-serif;
-  background: #f7f9fc;
-  color: #333;
+  background: linear-gradient(to right, #100c58, #2b0a76);
+  color: #fff;
 }
 
 /* NAVBAR */
 .netic-navbar {
-  background: #ffffff;
-  padding: 16px 0;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(to right, #100c58, #2b0a76);
+  padding: 20px 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   position: sticky;
   top: 0;
   z-index: 999;
@@ -31,10 +31,9 @@ body {
 }
 
 .logo {
-  color: #0077ff;
-  font-size: 26px;
+  color: white;
+  font-size: 28px;
   font-weight: 700;
-  text-decoration: none;
 }
 
 /* TOGGLE NAVBAR */
@@ -42,7 +41,7 @@ body {
   font-size: 26px;
   background: transparent;
   border: none;
-  color: #333;
+  color: white;
   cursor: pointer;
   display: none;
 }
@@ -53,11 +52,10 @@ body {
   right: -100%;
   width: 260px;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: #2b0a76;
   padding: 40px 20px;
   transition: right 0.3s ease;
   z-index: 1001;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-nav.active {
@@ -73,7 +71,7 @@ body {
 }
 
 .mobile-nav li a {
-  color: #333;
+  color: white;
   text-decoration: none;
   font-size: 18px;
   padding: 10px 16px;
@@ -83,15 +81,14 @@ body {
 
 .mobile-nav li a:hover,
 .mobile-nav li a.active {
-  background-color: #0077ff;
-  color: white;
+  background-color: #ef233c;
 }
 
 .close-btn {
   position: absolute;
   top: 20px;
   right: 20px;
-  color: #333;
+  color: white;
   font-size: 24px;
   cursor: pointer;
 }
@@ -101,7 +98,7 @@ body {
   top: 0; left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 1000;
   display: none;
 }
@@ -127,13 +124,12 @@ body {
   padding: 60px 20px;
   max-width: 1000px;
   margin: auto;
-  color: #333;
+  color: white;
 }
 
 h1 {
   text-align: center;
   margin-bottom: 30px;
-  color: #0077ff;
 }
 
 .filter {
@@ -144,17 +140,14 @@ h1 {
 .filter select {
   padding: 8px 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: none;
   font-size: 16px;
-  background: #f2f4f7;
-  color: #333;
 }
 
 .loader {
   text-align: center;
   margin: 20px 0;
   font-weight: bold;
-  color: #666;
 }
 
 #booking-list {
@@ -164,27 +157,26 @@ h1 {
 }
 
 .booking-item {
-  background: #ffffff;
+  background: #fff;
   color: #000;
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
 
 .booking-item button {
   margin-top: 10px;
   margin-right: 10px;
   padding: 8px 16px;
-  background-color: #0077ff;
+  background-color: #ef233c;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s;
 }
 
 .booking-item button:hover {
-  background-color: #005dc1;
+  background-color: #c9182a;
 }
 
 /* MODAL */
@@ -194,21 +186,20 @@ h1 {
   z-index: 1000;
   left: 0; top: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
 }
 
 .modal-content {
-  background: #ffffff;
-  color: #333;
+  background: white;
+  color: #000;
   padding: 30px;
   border-radius: 10px;
   width: 90%;
   max-width: 400px;
   text-align: center;
   position: relative;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.1);
 }
 
 .modal-content .stars {
@@ -224,7 +215,7 @@ h1 {
 
 .star:hover,
 .star.selected {
-  color: #0077ff;
+  color: #ef233c;
 }
 
 .modal-content textarea {
@@ -233,12 +224,10 @@ h1 {
   margin-bottom: 15px;
   border-radius: 6px;
   border: 1px solid #ccc;
-  background-color: #f7f9fc;
-  color: #333;
 }
 
 .modal-content button {
-  background-color: #0077ff;
+  background-color: #ef233c;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -252,5 +241,4 @@ h1 {
   right: 16px;
   font-size: 22px;
   cursor: pointer;
-  color: #666;
 }

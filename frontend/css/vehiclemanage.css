@@ -1,10 +1,10 @@
 :root {
-  --color-primary: #0077ff;
-  --color-accent: #0077ff;
-  --color-bg: #f7f9fc;
-  --color-card: #ffffff;
+  --color-primary: #e50914; /* Netflix red */
+  --color-accent: #e50914;
+  --color-bg: #141414;
+  --color-card: #1f1f1f;
   --radius: 10px;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   --spacing: 1rem;
 }
 
@@ -15,9 +15,9 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, sans-serif;
   background: var(--color-bg);
-  color: #333;
+  color: #f1f1f1;
 }
 
 .container {
@@ -42,17 +42,17 @@ body {
 .field label {
   display: flex;
   flex-direction: column;
-  font-weight: 500;
-  color: #222;
+  font-weight: bold;
+  color: #fff;
 }
 
 .field input {
   padding: 0.5rem;
   border-radius: var(--radius);
-  border: 1px solid #ccc;
+  border: 1px solid #444;
   margin-top: 0.25rem;
-  background-color: #f2f4f8;
-  color: #222;
+  background-color: #2a2a2a;
+  color: #fff;
 }
 
 #vehicleForm button {
@@ -62,7 +62,6 @@ body {
   margin-right: var(--spacing);
   cursor: pointer;
   color: #fff;
-  font-weight: 500;
 }
 
 #submitBtn {
@@ -70,7 +69,7 @@ body {
 }
 
 #cancelEdit {
-  background: #888;
+  background: #555;
 }
 
 .hidden {
@@ -90,10 +89,6 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease;
-}
-.card:hover {
-  transform: translateY(-4px);
 }
 
 .card img {
@@ -110,20 +105,17 @@ body {
 .card-content h3 {
   margin-bottom: 0.5rem;
   color: var(--color-primary);
-  font-size: 1.2rem;
 }
 
 .card-content p {
   margin: 0.25rem 0;
-  color: #555;
+  color: #ccc;
 }
 
 .card-actions {
   display: flex;
   gap: var(--spacing);
   padding: var(--spacing);
-  background: #fafafa;
-  border-top: 1px solid #eee;
 }
 
 .card-actions button {
@@ -132,17 +124,16 @@ body {
   border: none;
   border-radius: var(--radius);
   cursor: pointer;
-  transition: background 0.3s ease;
-  font-weight: 500;
+  transition: background 0.3s;
   color: white;
 }
 
 .card-actions .edit {
-  background: #f39c12;
+  background: #ffb347;
 }
 
 .card-actions .delete {
-  background: #e74c3c;
+  background: #b71c1c;
 }
 
 .card-actions .toggle {
@@ -174,7 +165,7 @@ body {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border-radius: var(--radius);
-  border: 1px solid #ccc;
+  border: 1px solid #444;
 }
 
 .controls button {
@@ -187,8 +178,8 @@ body {
 .controls input {
   flex: 1;
   min-width: 200px;
-  background: #f2f4f8;
-  color: #333;
+  background: #2a2a2a;
+  color: #fff;
 }
 
 @media (max-width: 600px) {
@@ -218,7 +209,7 @@ body {
   padding: 1rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  color: #333;
+  color: #fff;
 }
 
 #reviewsList {
@@ -226,7 +217,6 @@ body {
 }
 
 .review-item {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #444;
   padding: 0.5rem 0;
-  color: #444;
 }

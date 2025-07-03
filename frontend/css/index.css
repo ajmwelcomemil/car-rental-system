@@ -8,7 +8,6 @@
 body {
   font-family: 'Jost', sans-serif;
   background-color: #ffffff;
-  scroll-behavior: smooth;
 }
 
 /* NAVBAR */
@@ -35,19 +34,18 @@ body {
   color: white;
   font-size: 28px;
   font-weight: 700;
-  text-decoration: none;
+  text-decoration: none; /* Remove underline */
 }
 
 .logo a:hover {
-  text-decoration: none;
+  text-decoration: none; /* Ensure hover doesn't add underline */
 }
 
-/* NAV LINKS */
+
 .nav-links {
   list-style: none;
   display: flex;
   gap: 30px;
-  transition: all 0.3s ease-in-out;
 }
 
 .nav-links li a {
@@ -65,17 +63,15 @@ body {
   color: white;
 }
 
-/* MOBILE TOGGLE */
 .menu-toggle {
   display: none;
-  font-size: 28px;
+  font-size: 26px;
   color: white;
   cursor: pointer;
-  background: none;
-  border: none;
+  align-self: flex-end;
 }
 
-/* HERO SECTION */
+/* HERO SLIDESHOW */
 .hero {
   position: relative;
   height: 100vh;
@@ -103,18 +99,22 @@ body {
   opacity: 1;
 }
 
-/* SLIDE BACKGROUNDS */
+/* External background images with delays */
 .slide1 {
   background-image: url('https://wallpaperaccess.com/full/840326.jpg');
+  animation-delay: 0s;
 }
 .slide2 {
   background-image: url('https://i.pinimg.com/originals/8a/13/52/8a13524dc09a8efb9da159cb912c8c5b.jpg');
+  animation-delay: 8s;
 }
 .slide3 {
   background-image: url('https://wallpaperaccess.com/full/300092.jpg');
+  animation-delay: 16s;
 }
 .slide4 {
   background-image: url('https://wallpapers.com/images/featured/4k-car-g6a4f0e15hkua5oa.jpg');
+  animation-delay: 24s;
 }
 
 /* OVERLAY */
@@ -141,17 +141,15 @@ body {
 }
 
 .hero-content h1 {
-  font-size: 44px;
+  font-size: 42px;
   margin-bottom: 20px;
 }
 
 .hero-content p {
   font-size: 18px;
   margin-bottom: 30px;
-  max-width: 700px;
 }
 
-/* BUTTON */
 .btn-primary {
   padding: 12px 24px;
   background-color: #ef233c;
@@ -201,7 +199,6 @@ body {
 
   .menu-toggle {
     display: block;
-    margin-left: auto;
   }
 
   .nav-links {
